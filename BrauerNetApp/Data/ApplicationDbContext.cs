@@ -14,6 +14,7 @@ namespace BrauerNetApp.Data
 
         public virtual DbSet<Project> Projects { get; set; }
         public virtual DbSet<Goal> Goals { get; set; }
+        public virtual DbSet<Standard> Standards { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)

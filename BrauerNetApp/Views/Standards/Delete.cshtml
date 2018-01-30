@@ -1,0 +1,20 @@
+﻿@model BrauerNetApp.Models.Standard
+
+@{
+    ViewData["Title"] = "Standard - Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<h2>Are you sure you want to delete this standard?</h2>
+<hr />
+
+@Html.DisplayNameFor(model => model.Type): @Html.DisplayFor(model => model.Type)<br />
+@Html.DisplayNameFor(model => model.Identifier): @Html.DisplayFor(model => model.Identifier)<br />
+@Html.DisplayNameFor(model => model.Description): @Html.DisplayFor(model => model.Description)
+
+@using (Html.BeginForm())
+{
+    <input type="submit" value="Delete" />
+}
