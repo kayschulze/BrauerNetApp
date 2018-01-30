@@ -1,0 +1,18 @@
+﻿@model BrauerNetApp.Models.Project
+
+@{
+    ViewData["Title"] = "Project";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit Project @Html.DisplayFor(model => model.Name) on BrauerNet</h2>
+<hr />
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.ProjectId)
+
+    @Html.LabelFor(model => model.Name)
+    @Html.EditorFor(model => model.Name)
+
+    <input type="submit" value="Save" class="btn btn-success" />
+}

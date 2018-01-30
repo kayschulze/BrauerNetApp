@@ -12,9 +12,16 @@ namespace BrauerNetApp.Data
     {
         public ApplicationDbContext() { }
 
+        public virtual DbSet<Project> Projects { get; set; }
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder options)
+        {
+            options.UseMySql(@"Server=localhost;Port=3306;database=brauernetdbmigrations;uid=root;pwd=root;");
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
