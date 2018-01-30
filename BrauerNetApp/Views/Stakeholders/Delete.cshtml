@@ -1,0 +1,20 @@
+﻿@model BrauerNetApp.Models.Stakeholder
+
+@{
+    ViewData["Title"] = "Stakeholder - Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<h2>Are you sure you want to delete this stakeholder?</h2>
+<hr />
+
+@Html.DisplayNameFor(model => model.Organization): @Html.DisplayFor(model => model.Organization)<br />
+@Html.DisplayNameFor(model => model.ContactName): @Html.DisplayFor(model => model.ContactName)<br />
+@Html.DisplayNameFor(model => model.Notes): @Html.DisplayFor(model => model.Notes)
+
+@using (Html.BeginForm())
+{
+    <input type="submit" value="Delete" />
+}

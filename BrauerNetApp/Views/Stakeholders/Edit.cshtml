@@ -1,0 +1,24 @@
+﻿@model BrauerNetApp.Models.Stakeholder
+
+@{
+    ViewData["Title"] = "Stakeholder";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit Stakeholder @Html.DisplayFor(model => model.Organization) on BrauerNet</h2>
+<hr />
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.StakeholderId)
+
+    @Html.LabelFor(model => model.Organization)
+    @Html.EditorFor(model => model.Organization)
+
+    @Html.LabelFor(model => model.ContactName)
+    @Html.EditorFor(model => model.ContactName)
+
+    @Html.LabelFor(model => model.Notes)
+    @Html.EditorFor(model => model.Notes)
+
+    <input type="submit" value="Save" class="btn btn-success" />
+}
