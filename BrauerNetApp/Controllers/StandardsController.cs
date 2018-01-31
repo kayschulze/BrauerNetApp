@@ -5,40 +5,40 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using BrauerNetApp.Models;
 
-// For more information on enabling MVC for empty goals, visit https://go.microsoft.com/fwlink/?LinkID=397860
+// For more information on enabling MVC for empty standards, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace BrauerNetApp.Controllers
 {
-    public class GoalsController : Controller
+    public class StandardsController : Controller
     {
-        private IGoalRepository goalRepo;
+        private IStandardRepository standardRepo;
         // GET: /<controller>/
 
-        public GoalsController(IGoalRepository thisRepo = null)
+        public StandardsController(IStandardRepository thisRepo = null)
         {
             if (thisRepo == null)
             {
-                this.goalRepo = new EFGoalRepository();
+                this.standardRepo = new EFStandardRepository();
             }
             else
             {
-                this.goalRepo = thisRepo;
+                this.standardRepo = thisRepo;
             }
         }
 
         public IActionResult Index()
         {
-            var goalsList = goalRepo.Goals.ToList();
+            var standardsList = standardRepo.Standards.ToList();
 
-            return View(goalsList);
+            return View(standardsList);
         }
 
         public IActionResult Details(int id)
         {
-            ViewBag.thisGoal = goalRepo.Goals;
-            var thisGoal = goalRepo.Goals.FirstOrDefault(x => x.GoalId == id);
+            ViewBag.thisStandard = standardRepo.Standards;
+            var thisStandard = standardRepo.Standards.FirstOrDefault(x => x.StandardId == id);
 
-            return View(thisGoal);
+            return View(thisStandard);
         }
 
         public IActionResult Create()
@@ -47,36 +47,36 @@ namespace BrauerNetApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Goal goal)
+        public IActionResult Create(Standard standard)
         {
-            goalRepo.Save(goal);
+            standardRepo.Save(standard);
             return RedirectToAction("Index");
         }
 
         public IActionResult Edit(int id)
         {
-            var thisGoal = goalRepo.Goals.FirstOrDefault(x => x.GoalId == id);
-            return View(thisGoal);
+            var thisStandard = standardRepo.Standards.FirstOrDefault(x => x.StandardId == id);
+            return View(thisStandard);
         }
 
         [HttpPost]
-        public IActionResult Edit(Goal goal)
+        public IActionResult Edit(Standard standard)
         {
-            goalRepo.Edit(goal);
+            standardRepo.Edit(standard);
             return RedirectToAction("Index");
         }
 
         public IActionResult Delete(int id)
         {
-            var thisGoal = goalRepo.Goals.FirstOrDefault(x => x.GoalId == id);
-            return View(thisGoal);
+            var thisStandard = standardRepo.Standards.FirstOrDefault(x => x.StandardId == id);
+            return View(thisStandard);
         }
 
         [HttpPost, ActionName("Delete")]
         public IActionResult DeleteConfirmed(int id)
         {
-            Goal thisGoal = goalRepo.Goals.FirstOrDefault(x => x.GoalId == id);
-            goalRepo.Remove(thisGoal);
+            Standard thisStandard = standardRepo.Standards.FirstOrDefault(x => x.StandardId == id);
+            standardRepo.Remove(thisStandard);
             return RedirectToAction("Index");
         }
     }

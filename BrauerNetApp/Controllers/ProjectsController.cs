@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using BrauerNetApp.Models;
+using Microsoft.EntityFrameworkCore;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -28,10 +29,10 @@ namespace BrauerNetApp.Controllers
 
         public IActionResult Index()
         {
-            var projectsList = projectRepo.Projects.ToList();
-            //.Include(p => p.GoalProjects)
-            //.ThenInclude(j => j.Goal)
-            //.ToList();
+            var projectsList = projectRepo.Projects
+                .Include(p => p.GoalProjects)
+                .ThenInclude(j => j.Goal)
+                .ToList();
 
             return View(projectsList);
         }
@@ -39,10 +40,10 @@ namespace BrauerNetApp.Controllers
         public IActionResult Details(int id)
         {
             ViewBag.thisProject = projectRepo.Projects;
-            var thisProject = projectRepo.Projects.FirstOrDefault(x => x.ProjectId == id);
-            //.Include(p => p.GoalProjects)
-            //.ThenInclude(j => j.Goal)
-            //.FirstOrDefault(x => x.ProjectId == id);
+            var thisProject = projectRepo.Projects
+                .Include(p => p.GoalProjects)
+                .ThenInclude(j => j.Goal)
+                .FirstOrDefault(x => x.ProjectId == id);
             return View(thisProject);
         }
 
@@ -60,7 +61,10 @@ namespace BrauerNetApp.Controllers
 
         public IActionResult Edit(int id)
         {
-            var thisProject = projectRepo.Projects.FirstOrDefault(x => x.ProjectId == id);
+            var thisProject = projectRepo.Projects
+                .Include(p => p.GoalProjects)
+                .ThenInclude(j => j.Goal)
+                .FirstOrDefault(x => x.ProjectId == id);
             return View(thisProject);
         }
 

@@ -25,6 +25,12 @@
                             <li>@Html.ActionLink("Delete Project", "Delete", new { id = project.ProjectId })</li>
                             <li>@Html.ActionLink("Project Details", "Details", new { id = project.ProjectId })</li>
                         </ul>
+                        <ul>
+                            @for (var i = 0; i < 3; i++)
+                            {
+                                <li>@Html.DisplayFor(gp => project.GoalProjects[i].Goal.Description)</li>
+                            }
+                        </ul>
 
                     </div>
                 </div>

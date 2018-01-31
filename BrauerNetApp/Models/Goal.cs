@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -10,6 +10,8 @@ namespace BrauerNetApp.Models
         [Key]
         public int GoalId { get; set; }
         public string Description { get; set; }
+
+        public virtual List<GoalProject> GoalProjects { get; set; }
 
         public Goal() {}
 
