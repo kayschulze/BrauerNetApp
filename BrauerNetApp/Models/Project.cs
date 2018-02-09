@@ -12,6 +12,7 @@ namespace BrauerNetApp.Models
         public string Name { get; set; }
         public string NickName { get; set; }
         public virtual List<GoalProject> GoalProjects { get; set;}
+        public virtual List<ModuleProject> ModuleProjects { get; set; }
 
         public Project()
         {

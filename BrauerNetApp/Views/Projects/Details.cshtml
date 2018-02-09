@@ -1,8 +1,15 @@
 ﻿@model BrauerNetApp.Models.Project
+@using BrauerNetApp.Models
 
 @{
     ViewData["Title"] = "Project - Delete";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    List<ModuleProject> moduleProjectList = new List<BrauerNetApp.Models.ModuleProject>();
+    moduleProjectList = Model.ModuleProjects.ToList();
+
+    Module newModuleProject = new BrauerNetApp.Models.Module();
+    newModuleProject.ProjectId = Model.ProjectId;
 }
 
 <html>
@@ -22,5 +29,15 @@
             <li>@Html.DisplayNameFor(model => model.GoalProjects[i].Goal.Description): @Html.DisplayFor(model => model.GoalProjects[i].Goal.Description)</li>
         }
     </ul>
+
+    @Html.Partial("~/Views/Modules/DisplayModules.cshtml", moduleProjectList)
+    <div id="moduleProjectResult"></div>
+
+    @Html.Partial("~/Views/Modules/CreateModule.cshtml", newModuleProject)
+    <div id="newModuleProjectResult"></div>
+
+    @Html.Partial("~/Views/Modules/EditModule.cshtml", editModuleProject)
+    <div id="editModuleProjectResult"></div>
+
 </body>
 </html>

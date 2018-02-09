@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using BrauerNetApp.Models;
 using Microsoft.EntityFrameworkCore;
+using BrauerNetApp.Data;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -27,6 +28,8 @@ namespace BrauerNetApp.Controllers
             }
         }
 
+        ApplicationDbContext db = new ApplicationDbContext();
+
         public IActionResult Index()
         {
             var projectsList = projectRepo.Projects
@@ -39,10 +42,12 @@ namespace BrauerNetApp.Controllers
 
         public IActionResult Details(int id)
         {
-            ViewBag.thisProject = projectRepo.Projects;
-            var thisProject = projectRepo.Projects
+            //ViewBag.thisProject = projectRepo.Projects;
+            var thisProject = db.Projects
                 .Include(p => p.GoalProjects)
                 .ThenInclude(j => j.Goal)
+                .Include(mp => mp.ModuleProjects)
+                .ThenInclude(m => m.Module)
                 .FirstOrDefault(x => x.ProjectId == id);
             return View(thisProject);
         }
