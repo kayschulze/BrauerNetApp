@@ -1,0 +1,18 @@
+﻿@model BrauerNetApp.Models.Module
+
+@{
+    ViewData["Title"] = "Project - Delete";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<h2>Are you sure you want to delete this module?</h2>
+<hr />
+
+@Html.DisplayNameFor(model => model.Title): @Html.DisplayFor(model => model.Title)
+
+@using (Html.BeginForm())
+{
+    <input type="submit" value="Delete" />
+}

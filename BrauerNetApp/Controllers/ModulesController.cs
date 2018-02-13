@@ -70,18 +70,19 @@ namespace BrauerNetApp.Controllers
             return RedirectToAction("Details", "Projects", new { id = module.ProjectId });
         }
 
-        public IActionResult Delete(int id)
+        public IActionResult DeleteModule(int id)
         {
             var thisModule = moduleRepo.Modules.FirstOrDefault(x => x.ModuleId == id);
             return View(thisModule);
         }
 
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("DeleteModule")]
         public IActionResult DeleteConfirmed(int id)
         {
+            var module = moduleRepo.Modules.FirstOrDefault(x => x.ModuleId == id);
             Module thisModule = moduleRepo.Modules.FirstOrDefault(x => x.ModuleId == id);
             moduleRepo.Remove(thisModule);
-            return RedirectToAction("Index");
+            return RedirectToAction("Details", "Projects", new { id = module.ProjectId });
         }
     }
 }

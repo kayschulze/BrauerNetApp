@@ -41,7 +41,9 @@
         @Html.Partial("~/Views/Modules/EditModule.cshtml", module, new ViewDataDictionary(this.ViewData) { { "id", module.ModuleId } })
         <div id="editModuleProjectResult"></div>
 
-        @Html.ActionLink("EditModule", "EditModule", "Modules", new { id = module.ModuleId })
+        @Html.ActionLink("Edit Module", "EditModule", "Modules", new { id = module.ModuleId })
+        <hr/>
+        @Html.ActionLink("Delete Module", "DeleteModule", "Modules", new { id = module.ModuleId })
     }
 
 
