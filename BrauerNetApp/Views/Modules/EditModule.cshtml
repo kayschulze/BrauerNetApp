@@ -1,0 +1,22 @@
+﻿@model BrauerNetApp.Models.Module
+
+@{
+    ViewData["Title"] = "Module - Display";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Modules</h2>
+<hr />
+
+    @using (Html.BeginForm("EditModule", "Modules"))
+    {
+        @Html.LabelFor(x => Model.Title)
+        @Html.EditorFor(x => Model.Title)
+
+        @Html.HiddenFor(x => Model.ProjectId)
+        @Html.HiddenFor(x => Model.ModuleId)
+
+        <input type="submit" value="Submit" class="btn btn-success" />
+
+        <hr />
+    }

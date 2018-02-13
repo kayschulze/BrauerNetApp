@@ -32,7 +32,7 @@ namespace BrauerNetApp.Controllers
 
         public IActionResult Index()
         {
-            var projectsList = projectRepo.Projects
+            var projectsList = db.Projects
                 .Include(p => p.GoalProjects)
                 .ThenInclude(j => j.Goal)
                 .ToList();
@@ -42,12 +42,11 @@ namespace BrauerNetApp.Controllers
 
         public IActionResult Details(int id)
         {
-            //ViewBag.thisProject = projectRepo.Projects;
+            ViewBag.thisProject = projectRepo.Projects;
             var thisProject = db.Projects
                 .Include(p => p.GoalProjects)
                 .ThenInclude(j => j.Goal)
-                .Include(mp => mp.ModuleProjects)
-                .ThenInclude(m => m.Module)
+                .Include(m => m.Modules)
                 .FirstOrDefault(x => x.ProjectId == id);
             return View(thisProject);
         }

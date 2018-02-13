@@ -35,12 +35,11 @@ namespace BrauerNetApp.Controllers
             return View(modulesList);
         }
 
-        public IActionResult Details(int id)
+        public IActionResult DisplayModules(int id)
         {
-            ViewBag.thisModule = moduleRepo.Modules;
-            var thisModule = moduleRepo.Modules
-                .FirstOrDefault(x => x.ModuleId == id);
-            return View(thisModule);
+            var theseModules = moduleRepo.Modules
+                .Include(x => x.ProjectId == id);
+            return View(theseModules);
         }
 
         public IActionResult CreateModule()
@@ -56,19 +55,7 @@ namespace BrauerNetApp.Controllers
             return RedirectToAction("Details", "Projects", new { id = module.ProjectId });
         }
 
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public IActionResult Create(Module module)
-        {
-            moduleRepo.Save(module);
-            return RedirectToAction("Index");
-        }
-
-        public IActionResult Edit(int id)
+        public IActionResult EditModule(int id)
         {
             var thisModule = moduleRepo.Modules
                 .FirstOrDefault(x => x.ModuleId == id);
@@ -76,10 +63,11 @@ namespace BrauerNetApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(Module module)
+        public IActionResult EditModule(Module module)
         {
             moduleRepo.Edit(module);
-            return RedirectToAction("Index");
+            //return Json(module);
+            return RedirectToAction("Details", "Projects", new { id = module.ProjectId });
         }
 
         public IActionResult Delete(int id)

@@ -20,7 +20,7 @@ namespace BrauerNetApp.Data
         public virtual DbSet<Step> Steps { get; set; }
 
         public virtual DbSet<GoalProject> GoalProject { get; set; }
-        public virtual DbSet<ModuleProject> ModuleProjects { get; set; }
+        //public virtual DbSet<ModuleProject> ModuleProjects { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -38,7 +38,7 @@ namespace BrauerNetApp.Data
             // Customize the ASP.NET Identity model and override the defaults if needed.
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
-            builder.Entity<ModuleProject>()
+            /*builder.Entity<ModuleProject>()
                 .HasKey(p => new { p.ModuleId, p.ProjectId });
 
             builder.Entity<ModuleProject>()
@@ -49,7 +49,7 @@ namespace BrauerNetApp.Data
             builder.Entity<ModuleProject>()
                 .HasOne(mp => mp.Project)
                 .WithMany(mp => mp.ModuleProjects)
-                .HasForeignKey(mp => mp.ProjectId);
+                .HasForeignKey(mp => mp.ProjectId); */
 
             builder.Entity<GoalProject>()
                 .HasKey(p => new { p.GoalId, p.ProjectId });

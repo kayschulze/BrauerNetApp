@@ -14,7 +14,7 @@ namespace BrauerNetApp.Models
         public int ProjectId { get; set; }
         public virtual Project Project { get; set; }
 
-        public virtual List<ModuleProject> ModuleProjects { get; set; }
+        //public virtual List<ModuleProject> ModuleProjects { get; set; }
 
         public Module()
         {

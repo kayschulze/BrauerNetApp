@@ -5,8 +5,8 @@
     ViewData["Title"] = "Project - Delete";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
-    List<ModuleProject> moduleProjectList = new List<BrauerNetApp.Models.ModuleProject>();
-    moduleProjectList = Model.ModuleProjects.ToList();
+    List<Module> moduleProjectList = new List<BrauerNetApp.Models.Module>();
+    moduleProjectList = Model.Modules;
 
     Module newModuleProject = new BrauerNetApp.Models.Module();
     newModuleProject.ProjectId = Model.ProjectId;
@@ -36,8 +36,14 @@
     @Html.Partial("~/Views/Modules/CreateModule.cshtml", newModuleProject)
     <div id="newModuleProjectResult"></div>
 
-    @Html.Partial("~/Views/Modules/EditModule.cshtml", editModuleProject)
-    <div id="editModuleProjectResult"></div>
+    @foreach (var module in moduleProjectList)
+    {
+        @Html.Partial("~/Views/Modules/EditModule.cshtml", module, new ViewDataDictionary(this.ViewData) { { "id", module.ModuleId } })
+        <div id="editModuleProjectResult"></div>
+
+        @Html.ActionLink("EditModule", "EditModule", "Modules", new { id = module.ModuleId })
+    }
+
 
 </body>
 </html>

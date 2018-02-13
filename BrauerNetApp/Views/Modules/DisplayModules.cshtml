@@ -1,19 +1,20 @@
-﻿@model List<BrauerNetApp.Models.ModuleProject>
+﻿@model List<BrauerNetApp.Models.Module>
 
 @{ 
-    ViewData["Title"] = "ModuleProject - Display";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Modules - Display";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Modules</h2>
 <hr />
 
-@using (Html.BeginForm("DisplayModules", "Modules"))
-{
-    @for (var i = 0; i < Model.Count; i++)
-    {
-        @Html.LabelFor(module => module[i].Module.Title)
-    }
-}
-
+<form action="DisplayModule" , class="display-project-modules">
+    <ul>
+        @foreach (var module in Model)
+        {
+        <li>@Html.DisplayFor(x => module.Title)</li>
+        }
+    </ul>
+</form>
+    
 

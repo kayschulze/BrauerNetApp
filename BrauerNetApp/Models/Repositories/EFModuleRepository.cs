@@ -9,7 +9,6 @@ namespace BrauerNetApp.Models
 {
     public class EFModuleRepository : IModuleRepository
     {
-
         ApplicationDbContext db;
 
         public EFModuleRepository(ApplicationDbContext connection = null)
@@ -40,7 +39,39 @@ namespace BrauerNetApp.Models
         public Module Edit(Module module)
         {
             db.Entry(module).State = EntityState.Modified;
-            db.SaveChanges();
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException ex)
+            {
+                foreach (var entry in ex.Entries)
+                {
+                    if (entry.Entity is Module)
+                    {
+                        var databaseEntity = db.Modules
+                            .FirstOrDefault(m => m.ModuleId == ((Module)entry.Entity).ModuleId);
+                        var databaseEntry = db.Entry(databaseEntity);
+
+                        foreach (var property in entry.Metadata.GetProperties())
+                        {
+                            var proposedValue = entry.Property(property.Name).CurrentValue;
+                            var originalValue = entry.Property(property.Name).OriginalValue;
+                            var databaseValue = databaseEntry.Property(property.Name).CurrentValue;
+
+                            entry.Property(property.Name).OriginalValue = databaseEntry.Property(property.Name).CurrentValue;
+                        }
+                    }
+                    else
+                    {
+                        throw new NotSupportedException("Don't know how to handle concurrency conflicts for " + entry.Metadata.Name);
+                    }
+
+                    db.SaveChanges();
+                }
+            }
+            
             return module;
         }
 
