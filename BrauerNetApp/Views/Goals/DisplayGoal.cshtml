@@ -1,0 +1,16 @@
+﻿@model BrauerNetApp.Models.Goal
+
+@{
+    ViewData["Title"] = "Goal - Delete";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<html>
+<head>
+
+</head>
+
+<body>
+    <li>@Html.DisplayNameFor(model => model.Description): @Html.DisplayFor(model => model.Description)  @Html.ActionLink("Delete", "DeleteGoal", "Goals", new { id = Model.GoalId })<br /></li>
+</body>
+</html>

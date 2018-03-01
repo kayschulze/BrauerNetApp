@@ -1,0 +1,20 @@
+﻿@model BrauerNetApp.Models.QUESTOR
+@using BrauerNetApp.Models
+
+@{
+    ViewData["Title"] = "QUESTOR - Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    
+}
+
+<h2>Create a New QUESTOR</h2>
+<hr />
+
+@using (Html.BeginForm())
+{
+    @Html.LabelFor(model => model.Question)
+    @Html.EditorFor(model => model.Question)
+
+    <input type="submit" value="Create" class="btn btn-success" />
+}

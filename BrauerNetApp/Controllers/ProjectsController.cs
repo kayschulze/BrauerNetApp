@@ -33,8 +33,9 @@ namespace BrauerNetApp.Controllers
         public IActionResult Index()
         {
             var projectsList = db.Projects
-                .Include(p => p.GoalProjects)
-                .ThenInclude(j => j.Goal)
+                .Include(s => s.Steps)
+                .Include(r => r.Responses)
+                .Include(s => s.Standards)
                 .ToList();
 
             return View(projectsList);
@@ -44,9 +45,9 @@ namespace BrauerNetApp.Controllers
         {
             ViewBag.thisProject = projectRepo.Projects;
             var thisProject = db.Projects
-                .Include(p => p.GoalProjects)
-                .ThenInclude(j => j.Goal)
-                .Include(m => m.Modules)
+                .Include(s => s.Steps)
+                .Include(r => r.Responses)
+                .Include(s => s.Standards)
                 .FirstOrDefault(x => x.ProjectId == id);
             return View(thisProject);
         }
@@ -66,8 +67,9 @@ namespace BrauerNetApp.Controllers
         public IActionResult Edit(int id)
         {
             var thisProject = projectRepo.Projects
-                .Include(p => p.GoalProjects)
-                .ThenInclude(j => j.Goal)
+                .Include(s => s.Steps)
+                .Include(r => r.Responses)
+                .Include(s => s.Standards)
                 .FirstOrDefault(x => x.ProjectId == id);
             return View(thisProject);
         }

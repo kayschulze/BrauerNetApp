@@ -11,9 +11,10 @@ using System;
 namespace BrauerNetApp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180226015109_QUESTOR")]
+    partial class QUESTOR
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -104,11 +105,15 @@ namespace BrauerNetApp.Data.Migrations
                     b.Property<int>("ModuleId")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<int>("ProjectId");
+
                     b.Property<int>("QUESTORId");
 
                     b.Property<string>("Title");
 
                     b.HasKey("ModuleId");
+
+                    b.HasIndex("ProjectId");
 
                     b.HasIndex("QUESTORId");
 
@@ -120,15 +125,11 @@ namespace BrauerNetApp.Data.Migrations
                     b.Property<int>("ProjectId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("ModuleId");
-
                     b.Property<string>("Name");
 
                     b.Property<string>("NickName");
 
                     b.HasKey("ProjectId");
-
-                    b.HasIndex("ModuleId");
 
                     b.ToTable("Projects");
                 });
@@ -350,17 +351,15 @@ namespace BrauerNetApp.Data.Migrations
 
             modelBuilder.Entity("BrauerNetApp.Models.Module", b =>
                 {
+                    b.HasOne("BrauerNetApp.Models.Project", "Project")
+                        .WithMany("Modules")
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("BrauerNetApp.Models.QUESTOR", "QUESTOR")
                         .WithMany("Modules")
                         .HasForeignKey("QUESTORId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("BrauerNetApp.Models.Project", b =>
-                {
-                    b.HasOne("BrauerNetApp.Models.Module")
-                        .WithMany("Projects")
-                        .HasForeignKey("ModuleId");
                 });
 
             modelBuilder.Entity("BrauerNetApp.Models.Response", b =>

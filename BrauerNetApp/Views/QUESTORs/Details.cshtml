@@ -1,9 +1,10 @@
-﻿@model BrauerNetApp.Models.Project
+﻿@model BrauerNetApp.Models.QUESTOR
 @using BrauerNetApp.Models
 
 @{
-    ViewData["Title"] = "Project - Delete";
+    ViewData["Title"] = "QUESTOR - Delete";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
 }
 
 <html>
@@ -15,8 +16,7 @@
 <body>
     <h2>Project Details</h2>
     <hr />
-    @Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)<br />
-
+    @Html.DisplayNameFor(model => model.Question): @Html.DisplayFor(model => model.Question)<br />
 
 </body>
 </html>

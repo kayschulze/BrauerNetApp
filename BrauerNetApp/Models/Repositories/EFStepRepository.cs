@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BrauerNetApp.Models
 {
-    public class EFModuleRepository : IModuleRepository
+    public class EFStepRepository : IStepRepository
     {
         ApplicationDbContext db;
 
-        public EFModuleRepository(ApplicationDbContext connection = null)
+        public EFStepRepository(ApplicationDbContext connection = null)
         {
             if (connection == null)
             {
@@ -21,25 +21,22 @@ namespace BrauerNetApp.Models
             }
         }
 
-        public IQueryable<Module> Modules
-        { get { return db.Modules; } }
-
         public IQueryable<Project> Projects
         { get { return db.Projects; } }
 
-        public IQueryable<QUESTOR> QUESTORs
-        { get { return db.QUESTORs; } }
+        public IQueryable<Step> Steps
+        { get { return db.Steps; } }
 
-        public Module Save(Module module)
+        public Step Save(Step step)
         {
-            db.Modules.Add(module);
+            db.Steps.Add(step);
             db.SaveChanges();
-            return module;
+            return step;
         }
 
-        public Module Edit(Module module)
+        public Step Edit(Step step)
         {
-            db.Entry(module).State = EntityState.Modified;
+            db.Entry(step).State = EntityState.Modified;
 
             try
             {
@@ -49,10 +46,10 @@ namespace BrauerNetApp.Models
             {
                 foreach (var entry in ex.Entries)
                 {
-                    if (entry.Entity is Module)
+                    if (entry.Entity is Step)
                     {
-                        var databaseEntity = db.Modules
-                            .FirstOrDefault(m => m.ModuleId == ((Module)entry.Entity).ModuleId);
+                        var databaseEntity = db.Steps
+                            .FirstOrDefault(m => m.StepId == ((Step)entry.Entity).StepId);
                         var databaseEntry = db.Entry(databaseEntity);
 
                         foreach (var property in entry.Metadata.GetProperties())
@@ -72,13 +69,13 @@ namespace BrauerNetApp.Models
                     db.SaveChanges();
                 }
             }
-            
-            return module;
+
+            return step;
         }
 
-        public void Remove(Module module)
+        public void Remove(Step step)
         {
-            db.Modules.Remove(module);
+            db.Steps.Remove(step);
             db.SaveChanges();
         }
     }

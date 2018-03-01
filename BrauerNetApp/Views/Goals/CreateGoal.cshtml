@@ -1,18 +1,17 @@
 ﻿@model BrauerNetApp.Models.Goal
 
 @{
-    ViewData["Title"] = "Project - Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Goal - Create";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Create a New Project</h2>
-<hr />
-
-@using (Html.BeginForm())
+@using (Html.BeginForm("CreateGoal", "Goals"))
 {
     @Html.LabelFor(model => model.Description)
     @Html.EditorFor(model => model.Description)
 
+    @Html.HiddenFor(model => model.QUESTORId)
 
     <input type="submit" value="Create" class="btn btn-success" />
 }
+

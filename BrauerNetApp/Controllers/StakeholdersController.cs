@@ -29,9 +29,6 @@ namespace BrauerNetApp.Controllers
         public IActionResult Index()
         {
             var stakeholdersList = stakeholderRepo.Stakeholders.ToList();
-            //.Include(p => p.GoalStakeholders)
-            //.ThenInclude(j => j.Goal)
-            //.ToList();
 
             return View(stakeholdersList);
         }
@@ -40,9 +37,7 @@ namespace BrauerNetApp.Controllers
         {
             ViewBag.thisStakeholder = stakeholderRepo.Stakeholders;
             var thisStakeholder = stakeholderRepo.Stakeholders.FirstOrDefault(x => x.StakeholderId == id);
-            //.Include(p => p.GoalStakeholders)
-            //.ThenInclude(j => j.Goal)
-            //.FirstOrDefault(x => x.StakeholderId == id);
+
             return View(thisStakeholder);
         }
 

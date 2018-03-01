@@ -61,7 +61,7 @@ namespace BrauerNetApp
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Projects}/{action=Index}/{id?}");
+                    template: "{controller=QUESTORs}/{action=Index}/{id?}");
             });
         }
     }

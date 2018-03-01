@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using BrauerNetApp.Models;
+using BrauerNetApp.Data;
 using BrauerNetApp.Models.AccountViewModels;
 using BrauerNetApp.Services;
 
@@ -36,6 +37,15 @@ namespace BrauerNetApp.Controllers
             _emailSender = emailSender;
             _logger = logger;
         }
+
+        //public ApplicationUser db = new ApplicationUser();
+
+        /*public IActionResult Index()
+        {
+            var participantsList = db.ApplicationUser.ToList();
+
+            return View(participantsList);
+        }*/
 
         [TempData]
         public string ErrorMessage { get; set; }

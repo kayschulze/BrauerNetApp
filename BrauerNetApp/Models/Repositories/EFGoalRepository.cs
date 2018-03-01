@@ -27,6 +27,9 @@ namespace BrauerNetApp.Models
         public IQueryable<Goal> Goals
         { get { return db.Goals; } }
 
+        public IQueryable<Project> Projects
+        { get { return db.Projects; } }
+
         public Goal Save(Goal goal)
         {
             db.Goals.Add(goal);

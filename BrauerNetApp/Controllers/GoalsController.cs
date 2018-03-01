@@ -41,16 +41,16 @@ namespace BrauerNetApp.Controllers
             return View(thisGoal);
         }
 
-        public IActionResult Create()
+        public IActionResult CreateGoal()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult Create(Goal goal)
+        public IActionResult CreateGoal(Goal goal)
         {
             goalRepo.Save(goal);
-            return RedirectToAction("Index");
+            return RedirectToAction("Edit", "QUESTORs", new { id = goal.QUESTORId });
         }
 
         public IActionResult Edit(int id)
@@ -66,18 +66,19 @@ namespace BrauerNetApp.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult Delete(int id)
+        public IActionResult DeleteGoal(int id)
         {
             var thisGoal = goalRepo.Goals.FirstOrDefault(x => x.GoalId == id);
             return View(thisGoal);
         }
 
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("DeleteGoal")]
         public IActionResult DeleteConfirmed(int id)
         {
+            var goal = goalRepo.Goals.FirstOrDefault(x => x.GoalId == id);
             Goal thisGoal = goalRepo.Goals.FirstOrDefault(x => x.GoalId == id);
             goalRepo.Remove(thisGoal);
-            return RedirectToAction("Index");
+            return RedirectToAction("Edit", "QUESTORs", new { id = goal.QUESTORId });
         }
     }
 }

@@ -1,0 +1,22 @@
+﻿@model List<BrauerNetApp.Models.Module>
+
+@{ 
+    ViewData["Title"] = "Modules - Display";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Modules</h2>
+<hr />
+
+<form action="DisplayModule" , class="display-project-modules">
+    <ul>
+        @foreach (var module in Model)
+        {
+            <li>@Html.DisplayFor(x => module.Title)</li>
+
+        
+        }
+    </ul>
+</form>
+    
+

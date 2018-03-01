@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using BrauerNetApp.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -26,6 +23,9 @@ namespace BrauerNetApp.Models
 
         public IQueryable<Standard> Standards
         { get { return db.Standards; } }
+
+        public IQueryable<Project> Projects
+        { get { return db.Projects; } }
 
         public Standard Save(Standard standard)
         {

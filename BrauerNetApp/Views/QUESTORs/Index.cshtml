@@ -1,30 +1,31 @@
-﻿@model List<BrauerNetApp.Models.Project>
+﻿@model List<BrauerNetApp.Models.QUESTOR>
 @using BrauerNetApp.Models;
 
 @{
-    ViewData["Title"] = "Project";
+    ViewData["Title"] = "QUESTOR";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Projects on BrauerNet</h2>
+<h2>QUESTORs on BrauerNet</h2>
 <hr />
 @if (Model.Count > 0)
 {
-    @foreach (var project in Model)
+    @foreach (var questor in Model)
     {
         <div class="row">
             <div class="col-md-4">
                 <div class="panel panel-info">
                     <div class="panel-heading">
-                        <h3>@Html.DisplayFor(modelItem => project.Name)</h3>
+                        <h3>@Html.DisplayFor(modelItem => questor.Question)</h3>
 
                     </div>
                     <div class="panel-body">
                         <ul>
-                            <li>@Html.ActionLink("Edit Project", "Edit", new { id = project.ProjectId })</li>
-                            <li>@Html.ActionLink("Delete Project", "Delete", new { id = project.ProjectId })</li>
-                            <li>@Html.ActionLink("Project Details", "Details", new { id = project.ProjectId })</li>
+                            <li>@Html.ActionLink("Edit QUESTOR", "Edit", new { id = questor.QUESTORId })</li>
+                            <li>@Html.ActionLink("Delete QUESTOR", "Delete", new { id = questor.QUESTORId })</li>
+                            <li>@Html.ActionLink("QUESTOR Details", "Details", new { id = questor.QUESTORId })</li>
                         </ul>
+
                     </div>
                 </div>
             </div>
@@ -32,6 +33,9 @@
     }
 }
 
+<h2>
+    @Html.ActionLink("Create QUESTOR", "Create", "QUESTORs")
+</h2>
 <h2>
     @Html.ActionLink("Create Project", "Create", "Projects")
 </h2>

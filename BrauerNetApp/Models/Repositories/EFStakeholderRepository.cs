@@ -27,6 +27,9 @@ namespace BrauerNetApp.Models
         public IQueryable<Stakeholder> Stakeholders
         { get { return db.Stakeholders; } }
 
+        public IQueryable<QUESTOR> QUESTORs
+        { get { return db.QUESTORs; } }
+
         public Stakeholder Save(Stakeholder stakeholder)
         {
             db.Stakeholders.Add(stakeholder);

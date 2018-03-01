@@ -4,18 +4,18 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BrauerNetApp.Models
 {
-    [Table("Goals")]
-    public class Goal
+    [Table("Responses")]
+    public class Response
     {
         [Key]
-        public int GoalId { get; set; }
+        public int ResponseId { get; set; }
         public string Description { get; set; }
-        public int QUESTORId { get; set; }
-        public virtual QUESTOR QUESTOR { get; set; }
+        public int ProjectId { get; set; }
+        public virtual Project Project { get; set; }
 
-        public Goal() {}
+        public Response() {}
 
-        public Goal(string description, int goalId = 0)
+        public Response(string description)
         {
             Description = description;
         }

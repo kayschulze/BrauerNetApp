@@ -1,0 +1,41 @@
+﻿@model List<BrauerNetApp.Models.ApplicationUser>
+@using BrauerNetApp.Models;
+
+@{
+    ViewData["Title"] = "ApplicationUser";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Users on BrauerNet</h2>
+<hr />
+@if (Model.Count > 0)
+{
+    @foreach (var user in Model)
+    {
+        <div class="row">
+            <div class="col-md-4">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3>@Html.DisplayFor(modelItem => user.Email)</h3>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}
+
+<h2>
+    @Html.ActionLink("Create Project", "Create", "Projects")
+</h2>
+<h2>
+    @Html.ActionLink("Create Participant", "Register", "Account")
+</h2>
+<h2>
+    @Html.ActionLink("Create Stakeholder", "Create", "Stakeholders")
+</h2>
+<h2>
+    @Html.ActionLink("Create Standard", "Create", "Standards")
+</h2>
+
+

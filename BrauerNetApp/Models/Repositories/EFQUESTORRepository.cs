@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BrauerNetApp.Models
 {
-    public class EFModuleRepository : IModuleRepository
+    public class EFQUESTORRepository : IQUESTORRepository
     {
         ApplicationDbContext db;
 
-        public EFModuleRepository(ApplicationDbContext connection = null)
+        public EFQUESTORRepository(ApplicationDbContext connection = null)
         {
             if (connection == null)
             {
@@ -21,25 +21,28 @@ namespace BrauerNetApp.Models
             }
         }
 
-        public IQueryable<Module> Modules
-        { get { return db.Modules; } }
-
-        public IQueryable<Project> Projects
-        { get { return db.Projects; } }
-
         public IQueryable<QUESTOR> QUESTORs
         { get { return db.QUESTORs; } }
 
-        public Module Save(Module module)
+        public IQueryable<Goal> Goals
+        { get { return db.Goals; } }
+
+        public IQueryable<Module> Modules
+        { get { return db.Modules; } }
+
+        public IQueryable<Stakeholder> Stakeholders
+        { get { return db.Stakeholders; } }
+
+        public QUESTOR Save(QUESTOR questor)
         {
-            db.Modules.Add(module);
+            db.QUESTORs.Add(questor);
             db.SaveChanges();
-            return module;
+            return questor;
         }
 
-        public Module Edit(Module module)
+        public QUESTOR Edit(QUESTOR questor)
         {
-            db.Entry(module).State = EntityState.Modified;
+            db.Entry(questor).State = EntityState.Modified;
 
             try
             {
@@ -49,10 +52,10 @@ namespace BrauerNetApp.Models
             {
                 foreach (var entry in ex.Entries)
                 {
-                    if (entry.Entity is Module)
+                    if (entry.Entity is QUESTOR)
                     {
-                        var databaseEntity = db.Modules
-                            .FirstOrDefault(m => m.ModuleId == ((Module)entry.Entity).ModuleId);
+                        var databaseEntity = db.QUESTORs
+                            .FirstOrDefault(m => m.QUESTORId == ((QUESTOR)entry.Entity).QUESTORId);
                         var databaseEntry = db.Entry(databaseEntity);
 
                         foreach (var property in entry.Metadata.GetProperties())
@@ -73,12 +76,12 @@ namespace BrauerNetApp.Models
                 }
             }
             
-            return module;
+            return questor;
         }
 
-        public void Remove(Module module)
+        public void Remove(QUESTOR questor)
         {
-            db.Modules.Remove(module);
+            db.QUESTORs.Remove(questor);
             db.SaveChanges();
         }
     }

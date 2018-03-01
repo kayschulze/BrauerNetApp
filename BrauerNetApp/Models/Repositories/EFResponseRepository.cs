@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BrauerNetApp.Models
 {
-    public class EFModuleRepository : IModuleRepository
+    public class EFResponseRepository : IResponseRepository
     {
         ApplicationDbContext db;
 
-        public EFModuleRepository(ApplicationDbContext connection = null)
+        public EFResponseRepository(ApplicationDbContext connection = null)
         {
             if (connection == null)
             {
@@ -21,25 +21,22 @@ namespace BrauerNetApp.Models
             }
         }
 
-        public IQueryable<Module> Modules
-        { get { return db.Modules; } }
+        public IQueryable<Response> Responses
+        { get { return db.Responses; } }
 
         public IQueryable<Project> Projects
         { get { return db.Projects; } }
 
-        public IQueryable<QUESTOR> QUESTORs
-        { get { return db.QUESTORs; } }
-
-        public Module Save(Module module)
+        public Response Save(Response response)
         {
-            db.Modules.Add(module);
+            db.Responses.Add(response);
             db.SaveChanges();
-            return module;
+            return response;
         }
 
-        public Module Edit(Module module)
+        public Response Edit(Response response)
         {
-            db.Entry(module).State = EntityState.Modified;
+            db.Entry(response).State = EntityState.Modified;
 
             try
             {
@@ -49,10 +46,10 @@ namespace BrauerNetApp.Models
             {
                 foreach (var entry in ex.Entries)
                 {
-                    if (entry.Entity is Module)
+                    if (entry.Entity is Response)
                     {
-                        var databaseEntity = db.Modules
-                            .FirstOrDefault(m => m.ModuleId == ((Module)entry.Entity).ModuleId);
+                        var databaseEntity = db.Responses
+                            .FirstOrDefault(m => m.ResponseId == ((Response)entry.Entity).ResponseId);
                         var databaseEntry = db.Entry(databaseEntity);
 
                         foreach (var property in entry.Metadata.GetProperties())
@@ -73,12 +70,12 @@ namespace BrauerNetApp.Models
                 }
             }
             
-            return module;
+            return response;
         }
 
-        public void Remove(Module module)
+        public void Remove(Response response)
         {
-            db.Modules.Remove(module);
+            db.Responses.Remove(response);
             db.SaveChanges();
         }
     }

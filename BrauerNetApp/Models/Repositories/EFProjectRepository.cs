@@ -27,6 +27,18 @@ namespace BrauerNetApp.Models
         public IQueryable<Project> Projects
         { get { return db.Projects; } }
 
+        public IQueryable<Module> Modules
+        { get { return db.Modules; } }
+
+        public IQueryable<Step> Steps
+        { get { return db.Steps; } }
+
+        public IQueryable<Response> Responses
+        { get { return db.Responses; } }
+
+        public IQueryable<Standard> Standards
+        { get { return db.Standards; } }
+
         public Project Save(Project project)
         {
             db.Projects.Add(project);

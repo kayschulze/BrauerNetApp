@@ -8,6 +8,7 @@ namespace BrauerNetApp.Models
     public interface IStakeholderRepository
     {
         IQueryable<Stakeholder> Stakeholders { get; }
+        IQueryable<QUESTOR> QUESTORs { get; }
         Stakeholder Save(Stakeholder stakeholder);
         Stakeholder Edit(Stakeholder stakeholder);
         void Remove(Stakeholder stakeholder);

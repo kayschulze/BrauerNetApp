@@ -9,6 +9,7 @@ namespace BrauerNetApp.Models
     {
         IQueryable<Module> Modules { get; }
         IQueryable<Project> Projects { get; }
+        IQueryable<QUESTOR> QUESTORs { get; }
         Module Save(Module module);
         Module Edit(Module module);
         void Remove(Module module);
