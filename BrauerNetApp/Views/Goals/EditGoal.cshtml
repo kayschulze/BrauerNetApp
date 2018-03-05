@@ -1,0 +1,17 @@
+﻿@model BrauerNetApp.Models.Goal
+
+@{
+    ViewData["Title"] = "Goal - Display";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("EditGoal", "Goals"))
+{
+    @Html.HiddenFor(x => Model.GoalId)
+    @Html.HiddenFor(x => Model.QUESTORId)
+
+    @Html.LabelFor(x => Model.Description)
+    @Html.EditorFor(x => Model.Description)
+
+    <input type="submit" value="Save" class="btn btn-success" />
+}

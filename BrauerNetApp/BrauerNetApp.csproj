@@ -5,6 +5,11 @@
     <UserSecretsId>aspnet-BrauerNetApp-D4B11A19-9BAD-451B-86F1-7446BB818F76</UserSecretsId>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Data\Migrations\20180208080820_Attempt.cs" />
+    <Compile Remove="Data\Migrations\20180208080820_Attempt.Designer.cs" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />

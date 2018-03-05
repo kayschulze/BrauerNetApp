@@ -41,7 +41,7 @@ namespace BrauerNetApp.Controllers
         public IActionResult Details(int id)
         {
             ViewBag.thisQUESTOR = questorRepo.QUESTORs;
-            var thisQUESTOR = db.QUESTORs
+            var thisQUESTOR = questorRepo.QUESTORs
                 .Include(g => g.Goals)
                 .Include(m => m.Modules)
                 .FirstOrDefault(x => x.QUESTORId == id);
@@ -62,6 +62,7 @@ namespace BrauerNetApp.Controllers
 
         public IActionResult Edit(int id)
         {
+            //ViewBag.thisQUESTOR = questorRepo.QUESTORs;
             var thisQUESTOR = questorRepo.QUESTORs
                 .Include(g => g.Goals)
                 .Include(m => m.Modules)
@@ -73,7 +74,7 @@ namespace BrauerNetApp.Controllers
         public IActionResult Edit(QUESTOR questor)
         {
             questorRepo.Edit(questor);
-            return RedirectToAction("Index");
+            return RedirectToAction("Edit", "QUESTORs", new { id = questor.QUESTORId });
         }
 
         public IActionResult Delete(int id)

@@ -35,16 +35,16 @@ namespace BrauerNetApp.Controllers
             return View(modulesList);
         }
 
-        public IActionResult DisplayModules(int id)
+        public IActionResult DisplayModule(int id)
         {
-            var theseModules = moduleRepo.Modules
-                .Include(x => x.QUESTORId == id);
-            return View(theseModules);
+            ViewBag.thisModule = moduleRepo.Modules;
+            var thisModule = moduleRepo.Modules
+                .FirstOrDefault(x => x.QUESTORId == id);
+            return View(thisModule);
         }
 
         public IActionResult CreateModule()
         {
-            ViewBag.thisProject = moduleRepo.Projects;
             return View();
         }
 
@@ -52,7 +52,7 @@ namespace BrauerNetApp.Controllers
         public IActionResult CreateModule(Module module)
         {
             moduleRepo.Save(module);
-            return RedirectToAction("Details", "Projects", new { id = module.QUESTORId });
+            return RedirectToAction("Edit", "QUESTORs", new { id = module.QUESTORId });
         }
 
         public IActionResult EditModule(int id)
@@ -66,13 +66,13 @@ namespace BrauerNetApp.Controllers
         public IActionResult EditModule(Module module)
         {
             moduleRepo.Edit(module);
-            //return Json(module);
-            return RedirectToAction("Details", "Projects", new { id = module.QUESTORId });
+            return RedirectToAction("Edit", "Projects", new { id = module.QUESTORId });
         }
 
         public IActionResult DeleteModule(int id)
         {
-            var thisModule = moduleRepo.Modules.FirstOrDefault(x => x.ModuleId == id);
+            var thisModule = moduleRepo.Modules
+                .FirstOrDefault(x => x.ModuleId == id);
             return View(thisModule);
         }
 
@@ -82,7 +82,7 @@ namespace BrauerNetApp.Controllers
             var module = moduleRepo.Modules.FirstOrDefault(x => x.ModuleId == id);
             Module thisModule = moduleRepo.Modules.FirstOrDefault(x => x.ModuleId == id);
             moduleRepo.Remove(thisModule);
-            return RedirectToAction("Details", "Projects", new { id = module.QUESTORId });
+            return RedirectToAction("Edit", "QUESTORs", new { id = module.QUESTORId });
         }
     }
 }

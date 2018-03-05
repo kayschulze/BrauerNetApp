@@ -11,9 +11,10 @@ using System;
 namespace BrauerNetApp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180305021248_ModuleUpdate")]
+    partial class ModuleUpdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -107,7 +108,7 @@ namespace BrauerNetApp.Data.Migrations
                     b.Property<int>("ProjectId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("ModuleId");
+                    b.Property<int?>("ModuleId");
 
                     b.Property<string>("Name");
 
@@ -329,10 +330,9 @@ namespace BrauerNetApp.Data.Migrations
 
             modelBuilder.Entity("BrauerNetApp.Models.Project", b =>
                 {
-                    b.HasOne("BrauerNetApp.Models.Module", "Module")
+                    b.HasOne("BrauerNetApp.Models.Module")
                         .WithMany("Projects")
-                        .HasForeignKey("ModuleId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ModuleId");
                 });
 
             modelBuilder.Entity("BrauerNetApp.Models.Response", b =>

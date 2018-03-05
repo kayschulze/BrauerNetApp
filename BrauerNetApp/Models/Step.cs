@@ -13,10 +13,7 @@ namespace BrauerNetApp.Models
         public int ProjectId { get; set; }
         public virtual Project Project { get; set; }
 
-        public Step()
-        {
-
-        }
+        public Step() { }
 
         public Step(string description, int stepId = 0)
         {

@@ -10,33 +10,49 @@
     Goal newQUESTORGoal = new BrauerNetApp.Models.Goal();
     newQUESTORGoal.QUESTORId = Model.QUESTORId;
 
+    List<Module> newQUESTORModuleList = new List<BrauerNetApp.Models.Module>();
+    newQUESTORModuleList = Model.Modules;
 
-    List<Goal> QUESTORGoalList = new List<BrauerNetApp.Models.Goal>();
-    QUESTORGoalList = Model.Goals;
+    Module newQUESTORModule = new BrauerNetApp.Models.Module();
+    newQUESTORModule.QUESTORId = Model.QUESTORId;
 }
 
-<h2>Edit Project @Html.DisplayFor(model => model.Question) on BrauerNet</h2>
+<h2>Edit QUESTOR @Html.DisplayFor(model => Model.Question) on BrauerNet</h2>
 <hr />
 @using (Html.BeginForm())
 {
-    @Html.HiddenFor(model => model.QUESTORId)
+    @Html.HiddenFor(model => Model.QUESTORId)
 
-    @Html.LabelFor(model => model.Question)
-    @Html.EditorFor(model => model.Question)
+    @Html.LabelFor(model => Model.Question)
+    @Html.EditorFor(model => Model.Question)
 
     <input type="submit" value="Save" class="btn btn-success" />
 }
 
 <h3>Goals</h3>
 
-@using (Html.BeginForm())
+@foreach (var goal in newQUESTORGoalList)
 {
-    foreach (var goal in QUESTORGoalList)
-    {
-        @Html.Partial("~/Views/Goals/DisplayGoal.cshtml", goal)
-        <div id="QUESTORGoalResult"></div>
-    }
+    @Html.Partial("~/Views/Goals/DisplayGoal.cshtml", goal);
+    <div id="QUESTORGoalResult"></div>
+
+    @Html.Partial("~/Views/Goals/EditGoal.cshtml", goal, new ViewDataDictionary(this.ViewData) { { "id", goal.GoalId } });
+    <div id="editQUESTORGoalResult"></div>
 }
 
 @Html.Partial("~/Views/Goals/CreateGoal.cshtml", newQUESTORGoal)
 <div id="newQUESTORGoalResult"></div>
+
+<h3>Modules</h3>
+
+@foreach (var module in newQUESTORModuleList)
+{
+    @Html.Partial("~/Views/Modules/DisplayModule.cshtml", module);
+    <div id="QUESTORModuleResult"></div>
+
+    @Html.Partial("~/Views/Modules/EditModule.cshtml", module, new ViewDataDictionary(this.ViewData) { { "id", module.ModuleId } });
+    <div id="editQUESTORModuleResult"></div>
+}
+
+@Html.Partial("~/Views/Modules/CreateModule.cshtml", newQUESTORModule)
+<div id="newQUESTORModuleResult"></div>

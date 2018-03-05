@@ -7,7 +7,32 @@
             dataType: 'json',
             data: $(this).serialize(),
             success: function (result) {
-                $('#newQUESTORResult').html("cool!");
+                $('#newQUESTORModuleResult').html("cool!");
+            }
+        });
+    });
+
+    $('.display-module').click(function () {
+        $.ajax({
+            url: '@Url.Action("DisplayModule")',
+            type: 'GET',
+            data: $(this).serialize(),
+            dataType: 'json',
+            success: function (result) {
+                $('#QUESTORModuleResult').html(hola);
+            }
+        });
+    });
+
+    $('#edit-module').submit(function (event) {
+        event.preventDefault();
+        $.ajax({
+            url: '@Url.Action("EditModule", "Modules")',
+            type: 'POST',
+            dataType: 'json',
+            data: $(this).serialize(),
+            success: function (result) {
+                $('#editQUESTORModuleResult').html("yoyo!");
             }
         });
     });
@@ -38,6 +63,21 @@
         });
     });
 
+    $('#edit-goal').submit(function (event) {
+        event.preventDefault();
+        $.ajax({
+            url: '@Url.Action("EditGoal", "Goals")',
+            type: 'POST',
+            dataType: 'json',
+            data: $(this).serialize(),
+            success: function (result) {
+                console.log("Edit goal.");
+
+                $('#editQUESTORGoalResult').html("yoyo!");
+            }
+        });
+    });
+
     $('#create-module').submit(function (event) {
         event.preventDefault();
         $.ajax({
@@ -46,8 +86,6 @@
             dataType: 'json',
             data: $(this).serialize(),
             success: function (result) {
-                console.log("hey");
-
                 $('#newModuleProjectResult').html("cool!");
             }
         });
@@ -61,8 +99,6 @@
             dataType: 'json',
             data: $(this).serialize(),
             success: function (result) {
-                console.log("hey");
-
                 $('#editModuleProjectResult').html("yoyo!");
             }
         });

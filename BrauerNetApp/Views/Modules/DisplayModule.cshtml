@@ -1,22 +1,16 @@
-﻿@model List<BrauerNetApp.Models.Module>
+﻿@model BrauerNetApp.Models.Module
 
 @{ 
-    ViewData["Title"] = "Modules - Display";
+    ViewData["Title"] = "Module - Display";
     //Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Modules</h2>
-<hr />
+<html>
+<head></head>
 
-<form action="DisplayModule" , class="display-project-modules">
-    <ul>
-        @foreach (var module in Model)
-        {
-            <li>@Html.DisplayFor(x => module.Title)</li>
+<body>
+    <li>@Html.DisplayNameFor(x => Model.Title): @Html.DisplayFor(model => model.Title)  @Html.ActionLink("Delete", "DeleteModule", "Modules", new { id = Model.ModuleId })<br /></li>
+</body>
 
-        
-        }
-    </ul>
-</form>
-    
+</html>
 

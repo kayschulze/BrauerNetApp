@@ -63,7 +63,6 @@ namespace BrauerNetApp.Controllers
         public IActionResult EditStep(Step step)
         {
             stepRepo.Edit(step);
-            //return Json(step);
             return RedirectToAction("Details", "Projects", new { id = step.ProjectId });
         }
 

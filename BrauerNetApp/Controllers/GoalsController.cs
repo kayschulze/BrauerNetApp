@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using BrauerNetApp.Models;
 
@@ -28,15 +26,17 @@ namespace BrauerNetApp.Controllers
 
         public IActionResult Index()
         {
-            var goalsList = goalRepo.Goals.ToList();
+            var goalsList = goalRepo.Goals
+                .ToList();
 
             return View(goalsList);
         }
 
-        public IActionResult Details(int id)
+        public IActionResult DisplayGoal(int id)
         {
             ViewBag.thisGoal = goalRepo.Goals;
-            var thisGoal = goalRepo.Goals.FirstOrDefault(x => x.GoalId == id);
+            var thisGoal = goalRepo.Goals
+                .FirstOrDefault(x => x.GoalId == id);
 
             return View(thisGoal);
         }
@@ -53,22 +53,24 @@ namespace BrauerNetApp.Controllers
             return RedirectToAction("Edit", "QUESTORs", new { id = goal.QUESTORId });
         }
 
-        public IActionResult Edit(int id)
+        public IActionResult EditGoal(int id)
         {
-            var thisGoal = goalRepo.Goals.FirstOrDefault(x => x.GoalId == id);
+            var thisGoal = goalRepo.Goals
+                .FirstOrDefault(x => x.GoalId == id);
             return View(thisGoal);
         }
 
         [HttpPost]
-        public IActionResult Edit(Goal goal)
+        public IActionResult EditGoal(Goal goal)
         {
             goalRepo.Edit(goal);
-            return RedirectToAction("Index");
+            return RedirectToAction("Edit", "QUESTORs", new { id = goal.QUESTORId });
         }
 
         public IActionResult DeleteGoal(int id)
         {
-            var thisGoal = goalRepo.Goals.FirstOrDefault(x => x.GoalId == id);
+            var thisGoal = goalRepo.Goals
+                .FirstOrDefault(x => x.GoalId == id);
             return View(thisGoal);
         }
 
