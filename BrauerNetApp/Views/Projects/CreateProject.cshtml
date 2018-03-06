@@ -1,0 +1,20 @@
+﻿@model BrauerNetApp.Models.Project
+
+@{
+    ViewData["Title"] = "Project - Create";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("CreateProject", "Projects"))
+{
+    @Html.LabelFor(model => model.Name)
+    @Html.EditorFor(model => model.Name)
+
+    @Html.LabelFor(model => model.NickName)
+    @Html.EditorFor(model => model.NickName)
+
+    @Html.HiddenFor(module => Model.ProjectId)
+    @Html.HiddenFor(module => Model.ModuleId)
+
+    <input type="submit" value="Create" class="btn btn-success" />
+}

@@ -41,7 +41,7 @@ namespace BrauerNetApp.Controllers
             return View(projectsList);
         }
 
-        public IActionResult Details(int id)
+        public IActionResult DetailsProject(int id)
         {
             ViewBag.thisProject = projectRepo.Projects;
             var thisProject = db.Projects
@@ -52,47 +52,55 @@ namespace BrauerNetApp.Controllers
             return View(thisProject);
         }
 
-        public IActionResult Create()
+        public IActionResult CreateProject()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult Create(Project project)
+        public IActionResult CreateProject(Project project)
         {
             projectRepo.Save(project);
-            return RedirectToAction("Index");
+            var thisProject = projectRepo.Projects.FirstOrDefault(x => x.ProjectId == project.ProjectId);
+            return RedirectToAction("Edit", "QUESTORs", new { id = thisProject.ModuleId });
         }
 
-        public IActionResult Edit(int id)
+        public IActionResult EditProject(int id)
         {
+            var project = projectRepo.Projects.FirstOrDefault(x => x.ProjectId == id);
             var thisProject = projectRepo.Projects
                 .Include(s => s.Steps)
                 .Include(r => r.Responses)
                 .Include(s => s.Standards)
+                .Include(m => m.Module)
+                .ThenInclude(q => q.QUESTORId)
                 .FirstOrDefault(x => x.ProjectId == id);
             return View(thisProject);
         }
 
         [HttpPost]
-        public IActionResult Edit(Project project)
+        public IActionResult EditProject(Project project)
         {
             projectRepo.Edit(project);
-            return RedirectToAction("Index");
+            var module = project.ModuleId;
+            return RedirectToAction("Edit", "QUESTORs", new { id = project.Module.QUESTORId });
         }
 
-        public IActionResult Delete(int id)
+        public IActionResult DeleteProject(int id)
         {
-            var thisProject = projectRepo.Projects.FirstOrDefault(x => x.ProjectId == id);
+            var thisProject = projectRepo.Projects
+                .FirstOrDefault(x => x.ProjectId == id);
             return View(thisProject);
         }
 
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("DeleteProject")]
         public IActionResult DeleteConfirmed(int id)
         {
+            var project = projectRepo.Projects //may not need
+                .FirstOrDefault(x => x.ProjectId == id);
             Project thisProject = projectRepo.Projects.FirstOrDefault(x => x.ProjectId == id);
             projectRepo.Remove(thisProject);
-            return RedirectToAction("Index");
+            return RedirectToAction("Edit", "QUESTORs", new { id = project.Module.QUESTORId });
         }
     }
 }

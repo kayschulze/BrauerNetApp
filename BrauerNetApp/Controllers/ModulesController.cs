@@ -39,6 +39,12 @@ namespace BrauerNetApp.Controllers
         {
             ViewBag.thisModule = moduleRepo.Modules;
             var thisModule = moduleRepo.Modules
+                .Include(p => p.Projects)
+                .ThenInclude(s => s.Steps)
+                .Include(p => p.Projects)
+                .ThenInclude(r => r.Responses)
+                .Include(p => p.Projects)
+                .ThenInclude(s => s.Standards)
                 .FirstOrDefault(x => x.QUESTORId == id);
             return View(thisModule);
         }
@@ -58,6 +64,12 @@ namespace BrauerNetApp.Controllers
         public IActionResult EditModule(int id)
         {
             var thisModule = moduleRepo.Modules
+                .Include(p => p.Projects)
+                .ThenInclude(s => s.Steps)
+                .Include(p => p.Projects)
+                .ThenInclude(r => r.Responses)
+                .Include(p => p.Projects)
+                .ThenInclude(s => s.Standards)
                 .FirstOrDefault(x => x.ModuleId == id);
             return View(thisModule);
         }
@@ -66,7 +78,7 @@ namespace BrauerNetApp.Controllers
         public IActionResult EditModule(Module module)
         {
             moduleRepo.Edit(module);
-            return RedirectToAction("Edit", "Projects", new { id = module.QUESTORId });
+            return RedirectToAction("Edit", "QUESTORs", new { id = module.QUESTORId });
         }
 
         public IActionResult DeleteModule(int id)

@@ -44,6 +44,14 @@ namespace BrauerNetApp.Controllers
             var thisQUESTOR = questorRepo.QUESTORs
                 .Include(g => g.Goals)
                 .Include(m => m.Modules)
+                .ThenInclude(p => p.Projects)
+                .ThenInclude(s => s.Steps)
+                .Include(m => m.Modules)
+                .ThenInclude(p => p.Projects)
+                .ThenInclude(s => s.Responses)
+                .Include(m => m.Modules)
+                .ThenInclude(p => p.Projects)
+                .ThenInclude(s => s.Standards)
                 .FirstOrDefault(x => x.QUESTORId == id);
             return View(thisQUESTOR);
         }
@@ -66,6 +74,14 @@ namespace BrauerNetApp.Controllers
             var thisQUESTOR = questorRepo.QUESTORs
                 .Include(g => g.Goals)
                 .Include(m => m.Modules)
+                .ThenInclude(p => p.Projects)
+                .ThenInclude(s => s.Steps)
+                .Include(m => m.Modules)
+                .ThenInclude(p => p.Projects)
+                .ThenInclude(s => s.Responses)
+                .Include(m => m.Modules)
+                .ThenInclude(p => p.Projects)
+                .ThenInclude(s => s.Standards)
                 .FirstOrDefault(x => x.QUESTORId == id);
             return View(thisQUESTOR);
         }

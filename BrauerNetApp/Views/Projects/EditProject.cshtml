@@ -2,18 +2,19 @@
 
 @{
     ViewData["Title"] = "Project";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Edit Project @Html.DisplayFor(model => model.Name) on BrauerNet</h2>
-<hr />
 @using (Html.BeginForm())
 {
     @Html.HiddenFor(model => model.ProjectId)
+    @Html.HiddenFor(model => model.ModuleId)
 
     @Html.LabelFor(model => model.Name)
     @Html.EditorFor(model => model.Name)
 
+    @Html.LabelFor(model => model.NickName)
+    @Html.EditorFor(model => model.NickName)
 
     <input type="submit" value="Save" class="btn btn-success" />
 }
