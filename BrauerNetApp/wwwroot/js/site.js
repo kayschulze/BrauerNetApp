@@ -129,16 +129,42 @@
         });
     });
 
-    /*$('#edit-module').submit(function (event) {
+    $('#create-step').submit(function (event) {
         event.preventDefault();
         $.ajax({
-            url: '@Url.Action("EditModule", "Modules")',
+            url: '@Url.Action("CreateStep", "Steps")',
             type: 'POST',
             dataType: 'json',
             data: $(this).serialize(),
             success: function (result) {
-                $('#editModuleProjectResult').html("yoyo!");
+                $('#newProjectStepResult').html("cool!");
             }
         });
-    });*/
+    });
+
+    $('.display-step').click(function () {
+        $.ajax({
+            url: '@Url.Action(DetailsStep")',
+            type: 'GET',
+            data: $(this).serialize(),
+            dataType: 'json',
+
+            success: function (result) {
+                $('#ProjectStepResult').html(hola);
+            }
+        });
+    });
+
+    $('#edit-step').submit(function (event) {
+        event.preventDefault();
+        $.ajax({
+            url: '@Url.Action("EditStep", "Steps")',
+            type: 'POST',
+            dataType: 'json',
+            data: $(this).serialize(),
+            success: function (result) {
+                $('#editProjectStepResult').html("yoyo!");
+            }
+        });
+    });
 });

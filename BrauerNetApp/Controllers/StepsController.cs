@@ -1,4 +1,4 @@
-﻿using System.Linq;
+﻿    using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using BrauerNetApp.Models;
 using Microsoft.EntityFrameworkCore;
@@ -49,12 +49,21 @@ namespace BrauerNetApp.Controllers
         public IActionResult CreateStep(Step step)
         {
             stepRepo.Save(step);
-            return RedirectToAction("Details", "Project", new { id = step.ProjectId });
+            ViewBag.thisStep = stepRepo.Steps
+                .Include(p => p.Project)
+                .ThenInclude(m => m.Module)
+                .ThenInclude(q => q.QUESTOR)
+                .FirstOrDefault(x => x.StepId == step.StepId);
+            var thisStep = stepRepo.Steps.FirstOrDefault(x => x.StepId == step.StepId);
+            return RedirectToAction("Edit", "QUESTORs", new { id = ViewBag.thisStep.Project.Module.QUESTORId });
         }
 
         public IActionResult EditStep(int id)
         {
             var thisStep = stepRepo.Steps
+                .Include(p => p.Project)
+                .ThenInclude(m => m.Module)
+                .ThenInclude(q => q.QUESTOR)
                 .FirstOrDefault(x => x.StepId == id);
             return View(thisStep);
         }
@@ -63,7 +72,12 @@ namespace BrauerNetApp.Controllers
         public IActionResult EditStep(Step step)
         {
             stepRepo.Edit(step);
-            return RedirectToAction("Details", "Projects", new { id = step.ProjectId });
+            ViewBag.thisStep = stepRepo.Steps
+                .Include(p => p.Project)
+                .ThenInclude(m => m.Module)
+                .ThenInclude(q => q.QUESTOR)
+                .FirstOrDefault(x => x.StepId == step.StepId);
+            return RedirectToAction("Edit", "QUESTORs", new { id = ViewBag.thisStep.Project.Module.QUESTORId });
         }
 
         public IActionResult DeleteStep(int id)
@@ -75,10 +89,15 @@ namespace BrauerNetApp.Controllers
         [HttpPost, ActionName("DeleteStep")]
         public IActionResult DeleteConfirmed(int id)
         {
+            ViewBag.thisStep = stepRepo.Steps
+                .Include(p => p.Project)
+                .ThenInclude(m => m.Module)
+                .ThenInclude(q => q.QUESTOR)
+                .FirstOrDefault(x => x.StepId == id);
             var step = stepRepo.Steps.FirstOrDefault(x => x.StepId == id);
             Step thisStep = stepRepo.Steps.FirstOrDefault(x => x.StepId == id);
             stepRepo.Remove(thisStep);
-            return RedirectToAction("Details", "Projects", new { id = step.ProjectId });
+            return RedirectToAction("Edit", "QUESTORs", new { id = ViewBag.thisStep.Project.Module.QUESTORId });
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿@model BrauerNetApp.Models.Module
 
-@{ 
+@{
     ViewData["Title"] = "Module - Display";
     //Layout = "~/Views/Shared/_Layout.cshtml";
 
@@ -11,27 +11,21 @@
     newModuleProject.ModuleId = Model.ModuleId;
 }
 
-<html>
-<head></head>
+<li>@Html.DisplayNameFor(x => Model.Title): @Html.DisplayFor(model => model.Title)  @Html.ActionLink("Delete", "DeleteModule", "Modules", new { id = Model.ModuleId })<br /></li>
 
-<body>
-    <li>@Html.DisplayNameFor(x => Model.Title): @Html.DisplayFor(model => model.Title)  @Html.ActionLink("Delete", "DeleteModule", "Modules", new { id = Model.ModuleId })<br /></li>
+<h3>Projects</h3>
 
-    <h3>Projects</h3>
+@foreach (var project in newModuleProjectList)
+{
+    @Html.Partial("~/Views/Projects/DetailsProject.cshtml", project);
+    <div id="ModuleProjectResult"></div>
 
-    @foreach (var project in newModuleProjectList)
-    {
-        @Html.Partial("~/Views/Projects/DetailsProject.cshtml", project);
-        <div id="ModuleProjectResult"></div>
+    @Html.Partial("~/Views/Projects/EditProject.cshtml", project, new ViewDataDictionary(this.ViewData) { { "id", project.ProjectId } });
+    <div id="editProjectStepResult"></div>
+}
 
-        @Html.Partial("~/Views/Projects/EditProject.cshtml", project, new ViewDataDictionary(this.ViewData) { { "id", project.ProjectId } });
-        <div id="editModuleProjectResult"></div>
-    }
+@Html.Partial("~/Views/Projects/CreateProject.cshtml", newModuleProject)
+<div id="newModuleProjectResult"></div>
 
-    @Html.Partial("~/Views/Projects/CreateProject.cshtml", newModuleProject)
-    <div id="newModuleProjectResult"></div>
 
-</body>
-
-</html>
 

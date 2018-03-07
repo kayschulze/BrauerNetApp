@@ -11,6 +11,6 @@
 </head>
 
 <body>
-    @Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)<br />
+    @Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)  @Html.ActionLink("Delete", "DeleteProject", "Projects", new { id = Model.ProjectId })<br />
 </body>
 </html>

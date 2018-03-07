@@ -1,0 +1,16 @@
+﻿@model BrauerNetApp.Models.Step
+@using BrauerNetApp.Models
+
+@{
+    ViewData["Title"] = "Step - Delete";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<html>
+<head>
+</head>
+
+<body>
+    @Html.DisplayNameFor(model => model.Description): @Html.DisplayFor(model => model.Description)  @Html.ActionLink("Delete", "DeleteStep", "Steps", new { id = Model.StepId })<br />
+</body>
+</html>

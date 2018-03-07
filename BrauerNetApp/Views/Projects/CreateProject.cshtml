@@ -13,8 +13,9 @@
     @Html.LabelFor(model => model.NickName)
     @Html.EditorFor(model => model.NickName)
 
-    @Html.HiddenFor(module => Model.ProjectId)
-    @Html.HiddenFor(module => Model.ModuleId)
+    @Html.HiddenFor(model => Model.ProjectId)
+    @Html.HiddenFor(model => Model.ModuleId)
+    @Html.HiddenFor(model => Model.Module)
 
     <input type="submit" value="Create" class="btn btn-success" />
 }

@@ -61,13 +61,18 @@ namespace BrauerNetApp.Controllers
         public IActionResult CreateProject(Project project)
         {
             projectRepo.Save(project);
-            var thisProject = projectRepo.Projects.FirstOrDefault(x => x.ProjectId == project.ProjectId);
-            return RedirectToAction("Edit", "QUESTORs", new { id = thisProject.ModuleId });
+            ViewBag.thisProject = projectRepo.Projects
+                .Include(m => m.Module)
+                .ThenInclude(q => q.QUESTOR)
+                .FirstOrDefault(x => x.ProjectId == project.ProjectId);
+            
+            return RedirectToAction("Edit", "QUESTORs", new { id = ViewBag.thisProject.Module.QUESTORId });
         }
 
         public IActionResult EditProject(int id)
         {
-            var project = projectRepo.Projects.FirstOrDefault(x => x.ProjectId == id);
+            var project = projectRepo.Projects
+                .FirstOrDefault(x => x.ProjectId == id);
             var thisProject = projectRepo.Projects
                 .Include(s => s.Steps)
                 .Include(r => r.Responses)
@@ -82,8 +87,11 @@ namespace BrauerNetApp.Controllers
         public IActionResult EditProject(Project project)
         {
             projectRepo.Edit(project);
-            var module = project.ModuleId;
-            return RedirectToAction("Edit", "QUESTORs", new { id = project.Module.QUESTORId });
+            ViewBag.thisProject = projectRepo.Projects
+                .Include(m => m.Module)
+                .ThenInclude(q => q.QUESTOR)
+                .FirstOrDefault(x => x.ProjectId == project.ProjectId);
+            return RedirectToAction("Edit", "QUESTORs", new { id = ViewBag.thisProject.Module.QUESTORId });
         }
 
         public IActionResult DeleteProject(int id)
@@ -96,11 +104,13 @@ namespace BrauerNetApp.Controllers
         [HttpPost, ActionName("DeleteProject")]
         public IActionResult DeleteConfirmed(int id)
         {
-            var project = projectRepo.Projects //may not need
+            ViewBag.thisProject = projectRepo.Projects
+                .Include(m => m.Module)
+                .ThenInclude(q => q.QUESTOR)
                 .FirstOrDefault(x => x.ProjectId == id);
             Project thisProject = projectRepo.Projects.FirstOrDefault(x => x.ProjectId == id);
             projectRepo.Remove(thisProject);
-            return RedirectToAction("Edit", "QUESTORs", new { id = project.Module.QUESTORId });
+            return RedirectToAction("Edit", "QUESTORs", new { id = ViewBag.thisProject.Module.QUESTORId });
         }
     }
 }

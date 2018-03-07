@@ -13,6 +13,9 @@ namespace BrauerNetApp.Models
         public string NickName { get; set; }
         public virtual Module Module { get; set; }
         public int ModuleId { get; set; }
+        //public int StepId { get; set; }
+        //public int ResponseId { get; set; }
+        //public int StandardId { get; set; }
 
         //public virtual List<Module> Modules { get; set; }
         public virtual List<Step> Steps { get; set; }

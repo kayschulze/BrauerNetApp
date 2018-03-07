@@ -1,20 +1,42 @@
 ﻿@model BrauerNetApp.Models.Project
+@using BrauerNetApp.Models
 
 @{
     ViewData["Title"] = "Project";
     //Layout = "~/Views/Shared/_Layout.cshtml";
+
+    List<Step> newProjectStepList = new List<BrauerNetApp.Models.Step>();
+    newProjectStepList = Model.Steps;
+
+    Step newProjectStep = new BrauerNetApp.Models.Step();
+    newProjectStep.ProjectId = Model.ProjectId;
 }
 
-@using (Html.BeginForm())
-{
-    @Html.HiddenFor(model => model.ProjectId)
-    @Html.HiddenFor(model => model.ModuleId)
 
-    @Html.LabelFor(model => model.Name)
-    @Html.EditorFor(model => model.Name)
+    @using (Html.BeginForm("EditProject", "Projects"))
+    {
+        @Html.HiddenFor(model => model.ProjectId)
+        @Html.HiddenFor(model => model.ModuleId)
 
-    @Html.LabelFor(model => model.NickName)
-    @Html.EditorFor(model => model.NickName)
+        @Html.LabelFor(model => model.Name)
+        @Html.EditorFor(model => model.Name)
 
-    <input type="submit" value="Save" class="btn btn-success" />
-}
+        @Html.LabelFor(model => model.NickName)
+        @Html.EditorFor(model => model.NickName)
+
+        <input type="submit" value="Save" class="btn btn-success" />
+    }
+
+    <h3>Steps</h3>
+
+    @foreach (var step in newProjectStepList)
+    {
+        @Html.Partial("~/Views/Steps/DetailsStep.cshtml", step);
+        <div id="ProjectStepResult"></div>
+
+        @Html.Partial("~/Views/Steps/EditStep.cshtml", step, new ViewDataDictionary(this.ViewData) { { "stepid", step.StepId } });
+        <div id="editProjectStepResult"></div>
+    }
+
+    @Html.Partial("~/Views/Steps/CreateStep.cshtml", newProjectStep)
+    <div id="newProjectStepResult"></div> <br /><br />
