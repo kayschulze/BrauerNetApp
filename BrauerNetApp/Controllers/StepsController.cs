@@ -1,4 +1,4 @@
-﻿    using System.Linq;
+﻿using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using BrauerNetApp.Models;
 using Microsoft.EntityFrameworkCore;
@@ -10,7 +10,6 @@ namespace BrauerNetApp.Controllers
     public class StepsController : Controller
     {
         private IStepRepository stepRepo;
-        // GET: /<controller>/
 
         public StepsController(IStepRepository thisRepo = null)
         {

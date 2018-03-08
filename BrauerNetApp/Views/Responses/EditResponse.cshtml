@@ -1,0 +1,18 @@
+﻿@model BrauerNetApp.Models.Response
+
+@{
+    ViewData["Title"] = "Response";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("EditResponse", "Responses"))
+{
+    @Html.HiddenFor(model => model.ProjectId)
+    @Html.HiddenFor(model => model.ResponseId)
+
+    @Html.LabelFor(model => model.Description)
+    @Html.EditorFor(model => model.Description)
+
+    <input type="submit" value="Save" class="btn btn-success" />
+    
+}

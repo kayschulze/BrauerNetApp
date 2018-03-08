@@ -10,7 +10,6 @@ namespace BrauerNetApp.Controllers
     public class ResponsesController : Controller
     {
         private IResponseRepository responseRepo;
-        // GET: /<controller>/
 
         public ResponsesController(IResponseRepository thisRepo = null)
         {
@@ -32,7 +31,7 @@ namespace BrauerNetApp.Controllers
             return View(responsesList);
         }
 
-        public IActionResult DisplayResponses(int id)
+        public IActionResult DetailsResponse(int id)
         {
             var theseResponses = responseRepo.Responses
                 .Include(x => x.ProjectId == id);
@@ -49,12 +48,21 @@ namespace BrauerNetApp.Controllers
         public IActionResult CreateResponse(Response response)
         {
             responseRepo.Save(response);
-            return RedirectToAction("Details", "Project", new { id = response.ProjectId });
+            ViewBag.thisResponse = responseRepo.Responses
+                .Include(p => p.Project)
+                .ThenInclude(m => m.Module)
+                .ThenInclude(q => q.QUESTOR)
+                .FirstOrDefault(x => x.ResponseId == response.ResponseId);
+            var thisStep = responseRepo.Responses.FirstOrDefault(x => x.ResponseId == response.ResponseId);
+            return RedirectToAction("Edit", "QUESTORs", new { id = ViewBag.thisResponse.Project.Module.QUESTORId });
         }
 
         public IActionResult EditResponse(int id)
         {
             var thisResponse = responseRepo.Responses
+                .Include(p => p.Project)
+                .ThenInclude(m => m.Module)
+                .ThenInclude(q => q.QUESTOR)
                 .FirstOrDefault(x => x.ResponseId == id);
             return View(thisResponse);
         }
@@ -63,8 +71,12 @@ namespace BrauerNetApp.Controllers
         public IActionResult EditResponse(Response response)
         {
             responseRepo.Edit(response);
-            //return Json(response);
-            return RedirectToAction("Details", "Projects", new { id = response.ProjectId });
+            ViewBag.thisResponse = responseRepo.Responses
+                .Include(p => p.Project)
+                .ThenInclude(m => m.Module)
+                .ThenInclude(q => q.QUESTOR)
+                .FirstOrDefault(x => x.ResponseId == response.ResponseId);
+            return RedirectToAction("Edit", "QUESTORs", new { id = ViewBag.thisResponse.Project.Module.QUESTORId });
         }
 
         public IActionResult DeleteResponse(int id)
@@ -76,10 +88,15 @@ namespace BrauerNetApp.Controllers
         [HttpPost, ActionName("DeleteResponse")]
         public IActionResult DeleteConfirmed(int id)
         {
+            ViewBag.thisResponse = responseRepo.Responses
+                .Include(p => p.Project)
+                .ThenInclude(m => m.Module)
+                .ThenInclude(q => q.QUESTOR)
+                .FirstOrDefault(x => x.ResponseId == id);
             var response = responseRepo.Responses.FirstOrDefault(x => x.ResponseId == id);
             Response thisResponse = responseRepo.Responses.FirstOrDefault(x => x.ResponseId == id);
             responseRepo.Remove(thisResponse);
-            return RedirectToAction("Details", "Projects", new { id = response.ProjectId });
+            return RedirectToAction("Edit", "QUESTORs", new { id = ViewBag.thisResponse.Project.Module.QUESTORId });
         }
     }
 }

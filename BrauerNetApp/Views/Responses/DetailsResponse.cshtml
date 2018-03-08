@@ -1,0 +1,16 @@
+﻿@model BrauerNetApp.Models.Response
+@using BrauerNetApp.Models
+
+@{
+    ViewData["Title"] = "Response - Details";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<html>
+<head>
+</head>
+
+<body>
+    @Html.DisplayNameFor(model => model.Description): @Html.DisplayFor(model => model.Description)  @Html.ActionLink("Delete", "DeleteResponse", "Responses", new { id = Model.ResponseId })<br />
+</body>
+</html>

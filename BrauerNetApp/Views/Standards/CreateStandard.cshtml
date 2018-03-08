@@ -1,0 +1,22 @@
+﻿@model BrauerNetApp.Models.Standard
+
+@{
+    ViewData["Title"] = "Standard - Create";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.LabelFor(model => model.Type)
+    @Html.EditorFor(model => model.Type)
+
+    @Html.LabelFor(model => model.Identifier)
+    @Html.EditorFor(model => model.Identifier)
+
+    @Html.LabelFor(model => model.Description)
+    @Html.EditorFor(model => model.Description)
+
+    @Html.HiddenFor()
+
+    <input type="submit" value="Create" class="btn btn-success" />
+}

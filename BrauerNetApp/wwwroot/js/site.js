@@ -167,4 +167,80 @@
             }
         });
     });
+
+    $('#create-response').submit(function (event) {
+        event.preventDefault();
+        $.ajax({
+            url: '@Url.Action("CreateResponse", "Responses")',
+            type: 'POST',
+            dataType: 'json',
+            data: $(this).serialize(),
+            success: function (result) {
+                $('#newProjectResponseResult').html("cool!");
+            }
+        });
+    });
+
+    $('.display-response').click(function () {
+        $.ajax({
+            url: '@Url.Action(DetailsResponse")',
+            type: 'GET',
+            data: $(this).serialize(),
+            dataType: 'json',
+            success: function (result) {
+                $('#ProjectResponseResult').html(hola);
+            }
+        });
+    });
+
+    $('#edit-response').submit(function (event) {
+        event.preventDefault();
+        $.ajax({
+            url: '@Url.Action("EditResponse", "Responses")',
+            type: 'POST',
+            dataType: 'json',
+            data: $(this).serialize(),
+            success: function (result) {
+                $('#editProjectResponseResult').html("yoyo!");
+            }
+        });
+    });
+
+    $('#create-standard').submit(function (event) {
+        event.preventDefault();
+        $.ajax({
+            url: '@Url.Action("CreateStandard", "Standards")',
+            type: 'POST',
+            dataType: 'json',
+            data: $(this).serialize(),
+            success: function (result) {
+                $('#newProjectStandardResult').html("cool!");
+            }
+        });
+    });
+
+    $('.display-standard').click(function () {
+        $.ajax({
+            url: '@Url.Action(DetailsStandard")',
+            type: 'GET',
+            data: $(this).serialize(),
+            dataType: 'json',
+            success: function (result) {
+                $('#ProjectStandardResult').html(hola);
+            }
+        });
+    });
+
+    $('#edit-standard').submit(function (event) {
+        event.preventDefault();
+        $.ajax({
+            url: '@Url.Action("EditStandard", "Standards")',
+            type: 'POST',
+            dataType: 'json',
+            data: $(this).serialize(),
+            success: function (result) {
+                $('#editProjectStandardResult').html("yoyo!");
+            }
+        });
+    });
 });
