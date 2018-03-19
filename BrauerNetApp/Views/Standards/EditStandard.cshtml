@@ -8,7 +8,7 @@
 <h2>Edit Standard @Html.DisplayFor(model => model.Type), 
     @Html.DisplayFor(model => model.Identifier) on BrauerNet</h2>
 <hr />
-@using (Html.BeginForm())
+@using (Html.BeginForm("EditStandard", "Standards"))
 {
     @Html.HiddenFor(model => model.StandardId)
 

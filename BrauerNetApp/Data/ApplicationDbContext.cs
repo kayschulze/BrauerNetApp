@@ -34,9 +34,20 @@ namespace BrauerNetApp.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            // Customize the ASP.NET Identity model and override the defaults if needed.
-            // For example, you can rename the ASP.NET Identity table names and more.
-            // Add your customizations after calling base.OnModelCreating(builder);
+
+
+            builder.Entity<ProjectStandard>()
+                .HasKey(p => new { p.StandardId, p.ProjectId });
+
+            builder.Entity<ProjectStandard>()
+                .HasOne(ps => ps.Standard)
+                .WithMany(s => s.ProjectStandards)
+                .HasForeignKey(ps => ps.StandardId);
+
+            builder.Entity<ProjectStandard>()
+                .HasOne(ps => ps.Project)
+                .WithMany(p => p.ProjectStandards)
+                .HasForeignKey(ps => ps.ProjectId);
         }
     }
 }

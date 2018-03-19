@@ -7,6 +7,7 @@
 
 @using (Html.BeginForm("CreateResponse", "Responses"))
 {
+    <h5>Contribute a Response</h5>
     @Html.LabelFor(model => model.Description)
     @Html.EditorFor(model => model.Description)
 

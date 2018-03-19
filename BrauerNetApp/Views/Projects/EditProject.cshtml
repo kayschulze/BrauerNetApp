@@ -16,66 +16,48 @@
 
     Response newProjectResponse = new BrauerNetApp.Models.Response();
     newProjectResponse.ProjectId = Model.ProjectId;
-
-    List<Standard> newProjectStandardList = new List<BrauerNetApp.Models.Standard>();
-    newProjectStandardList = Model.Standards;
-
-    Standard newProjectStandard = new BrauerNetApp.Models.Standard();
-    newProjectStandard.ProjectId = Model.ProjectId;
 }
 
+<div class="project standard">
+    @using (Html.BeginForm("EditProject", "Projects"))
+    {
+        @Html.HiddenFor(model => model.ProjectId)
+        @Html.HiddenFor(model => model.ModuleId)
 
-@using (Html.BeginForm("EditProject", "Projects"))
-{
-    @Html.HiddenFor(model => model.ProjectId)
-    @Html.HiddenFor(model => model.ModuleId)
+        <h3>Project:  </h3>
 
-    @Html.LabelFor(model => model.Name)
-    @Html.EditorFor(model => model.Name)
+        @Html.LabelFor(model => model.Name)
+        @Html.EditorFor(model => model.Name)
 
-    @Html.LabelFor(model => model.NickName)
-    @Html.EditorFor(model => model.NickName)
+        @Html.LabelFor(model => model.NickName)
+        @Html.EditorFor(model => model.NickName)
 
-    <input type="submit" value="Save" class="btn btn-success" />
-}
+        <input type="submit" value="Save" class="btn btn-success" />
+    }
 
-<h3>Steps</h3>
+    <div class="steps standard">
+        <h3>Steps</h3>
 
-@foreach (var step in newProjectStepList)
-{
-    @Html.Partial("~/Views/Steps/DetailsStep.cshtml", step);
-    <div id="ProjectStepResult"></div>
+        @foreach (var step in newProjectStepList)
+        {
+            @Html.Partial("~/Views/Steps/EditStep.cshtml", step, new ViewDataDictionary(this.ViewData) { { "stepid", step.StepId } });
+            <div id="editProjectStepResult"></div>
+        }
 
-    @Html.Partial("~/Views/Steps/EditStep.cshtml", step, new ViewDataDictionary(this.ViewData) { { "stepid", step.StepId } });
-    <div id="editProjectStepResult"></div>
-}
+        @Html.Partial("~/Views/Steps/CreateStep.cshtml", newProjectStep)
+        <div id="newProjectStepResult"></div> <br /><br />
+    </div>
 
-@Html.Partial("~/Views/Steps/CreateStep.cshtml", newProjectStep)
-<div id="newProjectStepResult"></div> <br /><br />
+    <div class="responses standard">
+        <h3>Responses</h3>
 
-<h3>Responses</h3>
+        @foreach (var response in newProjectResponseList)
+        {
+            @Html.Partial("~/Views/Responses/EditResponse.cshtml", response, new ViewDataDictionary(this.ViewData) { { "responseid", response.ResponseId } });
+            <div id="editProjectResponseResult"></div>
+        }
 
-@foreach (var response in newProjectResponseList)
-{
-    @Html.Partial("~/Views/Responses/DetailsResponse.cshtml", response);
-    <div id="ProjectResponseResult"></div>
-
-    @Html.Partial("~/Views/Responses/EditResponse.cshtml", response, new ViewDataDictionary(this.ViewData) { { "responseid", response.ResponseId } });
-    <div id="editProjectResponseResult"></div>
-}
-
-@Html.Partial("~/Views/Responses/CreateResponse.cshtml", newProjectResponse)
-<div id="newProjectResponseResult"></div> <br /><br />
-
-<h3>Standards</h3>
-@foreach (var standard in newProjectStandardList)
-{
-    @Html.Partial("~/Views/Standards/DetailsStandard.cshtml", standard);
-    <div id="ProjectStandardResult"></div>
-
-    @Html.Partial("~/Views/Standards/EditStandard.cshtml", standard, new ViewDataDictionary(this.ViewData) { { "standardid", standard.StandardId } });
-    <div id="editProjectResponseResult"></div>
-}
-
-@Html.Partial("~/Views/Standard/CreateStandard.cshtml", newProjectStandard)
-<div id="newProjectResponseResult"></div> <br /><br />
+        @Html.Partial("~/Views/Responses/CreateResponse.cshtml", newProjectResponse)
+        <div id="newProjectResponseResult"></div> <br /><br />
+    </div>
+</div>

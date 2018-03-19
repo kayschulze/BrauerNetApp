@@ -2,21 +2,40 @@
 @using BrauerNetApp.Models
 
 @{
-    ViewData["Title"] = "QUESTOR - Delete";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "QUESTOR";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
 
+    List<Goal> newQUESTORGoalList = new List<BrauerNetApp.Models.Goal>();
+    newQUESTORGoalList = Model.Goals;
+
+    Goal newQUESTORGoal = new BrauerNetApp.Models.Goal();
+    newQUESTORGoal.QUESTORId = Model.QUESTORId;
+
+    List<Module> newQUESTORModuleList = new List<BrauerNetApp.Models.Module>();
+    newQUESTORModuleList = Model.Modules;
+
+    Module newQUESTORModule = new BrauerNetApp.Models.Module();
+    newQUESTORModule.QUESTORId = Model.QUESTORId;
 }
 
-<html>
-<head>
-    <title>BrauerNet - QUESTOR Details</title>
+<div class="questormain standard">
+    <h2>QUESTOR: @Html.DisplayFor(model => Model.Question)</h2>
 
-</head>
 
-<body>
-    <h2>QUESTOR Details</h2>
-    <hr />
-    @Html.DisplayNameFor(model => model.Question): @Html.DisplayFor(model => model.Question)<br />
+    <div class="goals standard">
+        <h3>Goals</h3>
 
-</body>
-</html>
+        @foreach (var goal in newQUESTORGoalList)
+        {
+            @Html.Partial("~/Views/Goals/DisplayGoal.cshtml", goal);
+            <div id="QUESTORGoalResult"></div>
+        }
+    </div>
+
+
+    @foreach (var module in newQUESTORModuleList)
+    {
+        @Html.Partial("~/Views/Modules/DisplayModule.cshtml", module);
+        <div id="QUESTORModuleResult"></div>
+    }
+</div>

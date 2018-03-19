@@ -5,20 +5,14 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Create a New Standard</h2>
-<hr />
+<h2>Add A Standard</h2>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("AddStandard", "Standards"))
 {
-    @Html.LabelFor(model => model.Type)
-    @Html.EditorFor(model => model.Type)
+    @Html.LabelFor(model => model.StandardId)
+    @Html.DropDownList("StandardId")
 
-    @Html.LabelFor(model => model.Identifier)
-    @Html.EditorFor(model => model.Identifier)
-
-    @Html.LabelFor(model => model.Description)
-    @Html.EditorFor(model => model.Description)
-
+    //@Html.HiddenFor(model => model.ProjectId)
 
     <input type="submit" value="Create" class="btn btn-success" />
 }

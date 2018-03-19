@@ -5,7 +5,7 @@
     //Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("CreateStandard", "Standards"))
 {
     @Html.LabelFor(model => model.Type)
     @Html.EditorFor(model => model.Type)
@@ -16,7 +16,6 @@
     @Html.LabelFor(model => model.Description)
     @Html.EditorFor(model => model.Description)
 
-    @Html.HiddenFor()
 
     <input type="submit" value="Create" class="btn btn-success" />
 }

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using BrauerNetApp.Models;
 using Microsoft.EntityFrameworkCore;
@@ -14,7 +11,6 @@ namespace BrauerNetApp.Controllers
     public class ProjectsController : Controller
     {
         private IProjectRepository projectRepo;
-        // GET: /<controller>/
 
         public ProjectsController(IProjectRepository thisRepo = null)
         {
@@ -35,7 +31,7 @@ namespace BrauerNetApp.Controllers
             var projectsList = db.Projects
                 .Include(s => s.Steps)
                 .Include(r => r.Responses)
-                .Include(s => s.Standards)
+                //.Include(s => s.Standards)
                 .ToList();
 
             return View(projectsList);
@@ -76,7 +72,7 @@ namespace BrauerNetApp.Controllers
             var thisProject = projectRepo.Projects
                 .Include(s => s.Steps)
                 .Include(r => r.Responses)
-                .Include(s => s.Standards)
+                //.Include(s => s.Standards)
                 .Include(m => m.Module)
                 .ThenInclude(q => q.QUESTORId)
                 .FirstOrDefault(x => x.ProjectId == id);

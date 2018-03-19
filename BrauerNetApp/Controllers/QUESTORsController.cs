@@ -49,9 +49,9 @@ namespace BrauerNetApp.Controllers
                 .Include(m => m.Modules)
                 .ThenInclude(p => p.Projects)
                 .ThenInclude(s => s.Responses)
-                .Include(m => m.Modules)
-                .ThenInclude(p => p.Projects)
-                .ThenInclude(s => s.Standards)
+                //.Include(m => m.Modules)
+                //.ThenInclude(p => p.Projects)
+                //.ThenInclude(s => s.Standards)
                 .FirstOrDefault(x => x.QUESTORId == id);
             return View(thisQUESTOR);
         }
@@ -70,6 +70,8 @@ namespace BrauerNetApp.Controllers
 
         public IActionResult Edit(int id)
         {
+            var questor = questorRepo.QUESTORs
+                .FirstOrDefault(x => x.QUESTORId == id);
             //ViewBag.thisQUESTOR = questorRepo.QUESTORs;
             var thisQUESTOR = questorRepo.QUESTORs
                 .Include(g => g.Goals)
@@ -80,8 +82,9 @@ namespace BrauerNetApp.Controllers
                 .ThenInclude(p => p.Projects)
                 .ThenInclude(s => s.Responses)
                 .Include(m => m.Modules)
-                .ThenInclude(p => p.Projects)
-                .ThenInclude(s => s.Standards)
+                //.ThenInclude(p => p.Projects)
+                //.ThenInclude(ps => ps.ProjectStandards)
+                //.ThenInclude(s => s.Standard)
                 .FirstOrDefault(x => x.QUESTORId == id);
             return View(thisQUESTOR);
         }
@@ -90,6 +93,16 @@ namespace BrauerNetApp.Controllers
         public IActionResult Edit(QUESTOR questor)
         {
             questorRepo.Edit(questor);
+            ViewBag.thisQUESTOR = questorRepo.QUESTORs
+                .Include(g => g.Goals)
+                .Include(m => m.Modules)
+                .ThenInclude(p => p.Projects)
+                .ThenInclude(s => s.Steps)
+                .Include(m => m.Modules)
+                .ThenInclude(p => p.Projects)
+                .ThenInclude(s => s.Responses)
+                .Include(m => m.Modules)
+                .FirstOrDefault(x => x.QUESTORId == questor.QUESTORId);
             return RedirectToAction("Edit", "QUESTORs", new { id = questor.QUESTORId });
         }
 

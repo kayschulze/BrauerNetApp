@@ -7,6 +7,7 @@
 
 @using (Html.BeginForm("CreateModule", "Modules"))
 {
+    <h3>Add a Module</h3>
     @Html.LabelFor(module => module.Title)
     @Html.EditorFor(module => module.Title)
 

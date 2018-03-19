@@ -1,4 +1,4 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -78,6 +78,21 @@ namespace BrauerNetApp.Controllers
             Standard thisStandard = standardRepo.Standards.FirstOrDefault(x => x.StandardId == id);
             standardRepo.Remove(thisStandard);
             return RedirectToAction("Index");
+        }
+
+        public IActionResult AddStandard(int id)
+        {
+            ViewBag.StandardId = new SelectList(standardRepo.Standards, "StandardId", "Identifier");
+            var thisStandard = standardRepo.Standards
+                .FirstOrDefault(standard => standard.StandardId == id);
+            return View(thisStandard);
+        }
+
+        [HttpPost]
+        public IActionResult AddStandard(Standard standard)
+        {
+
+            return View("Index");
         }
     }
 }

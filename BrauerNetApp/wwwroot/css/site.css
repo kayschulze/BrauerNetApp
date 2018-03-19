@@ -1,6 +1,59 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    margin: 40px;
+    background-color: beige;
+}
+
+.btn {
+    margin: 5px;
+}
+
+.standard {
+    border: solid;
+    border-width: 2px;
+    border-radius: 30px;
+    padding: 10px;
+}
+
+.questormain {
+    background-color: red;
+}
+
+.module {
+    background-color: orange;
+    margin: 10px;
+}
+
+.project {
+    background-color: yellow;
+    margin-left: 25px;
+    margin-right: 25px;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+}
+
+.steps {
+    background-color: green;
+    margin-left: 35px;
+    margin-right: 35px;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+.responses {
+    background-color: blue;
+    margin-left: 35px;
+    margin-right: 35px;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+.goals {
+    background-color: purple;
+    margin-left: 150px;
+    margin-right: 150px;
+    padding: 15px;
 }
 
 /* Wrapping element */

@@ -63,6 +63,7 @@ namespace BrauerNetApp.Controllers
 
         public IActionResult EditModule(int id)
         {
+            ViewBag.thisModule = moduleRepo.Modules;
             var thisModule = moduleRepo.Modules
                 .Include(p => p.Projects)
                 .ThenInclude(s => s.Steps)

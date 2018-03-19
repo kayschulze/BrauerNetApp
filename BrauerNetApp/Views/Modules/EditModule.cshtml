@@ -3,15 +3,37 @@
 @{
     ViewData["Title"] = "Module - Display";
     //Layout = "~/Views/Shared/_Layout.cshtml";
+
+    List<Project> newModuleProjectList = new List<BrauerNetApp.Models.Project>();
+    newModuleProjectList = Model.Projects;
+
+    Project newModuleProject = new BrauerNetApp.Models.Project();
+    newModuleProject.ModuleId = Model.ModuleId;
 }
 
-@using (Html.BeginForm("EditModule", "Modules"))
-{
-    @Html.LabelFor(x => Model.Title)
-    @Html.EditorFor(x => Model.Title)
+<div class="module standard">
+    @using (Html.BeginForm("EditModule", "Modules"))
+    {
+        <h2>Module</h2>
+        <h3>
+            @Html.LabelFor(x => Model.Title)
+            @Html.EditorFor(x => Model.Title)
+        </h3>
 
-    @Html.HiddenFor(x => Model.QUESTORId)
-    @Html.HiddenFor(x => Model.ModuleId)
+        @Html.HiddenFor(x => Model.QUESTORId)
+        @Html.HiddenFor(x => Model.ModuleId)
 
-    <input type="submit" value="Submit" class="btn btn-success" />
-}
+        <input type="submit" value="Submit" class="btn btn-success" />
+    }
+
+    <h2>Projects</h2>
+
+    @foreach (var project in newModuleProjectList)
+    {
+        @Html.Partial("~/Views/Projects/EditProject.cshtml", project, new ViewDataDictionary(this.ViewData) { { "projectid", project.ProjectId } });
+        <div id="editModuleProjectResult"></div>
+    }
+    <br />
+    @Html.Partial("~/Views/Projects/CreateProject.cshtml", newModuleProject)
+    <div id="newModuleProjectResult"></div>
+</div>

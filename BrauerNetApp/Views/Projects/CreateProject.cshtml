@@ -7,6 +7,7 @@
 
 @using (Html.BeginForm("CreateProject", "Projects"))
 {
+    <h4>Add a Project</h4>
     @Html.LabelFor(model => model.Name)
     @Html.EditorFor(model => model.Name)
 
