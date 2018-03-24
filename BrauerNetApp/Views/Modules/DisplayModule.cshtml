@@ -8,14 +8,54 @@
     newModuleProjectList = Model.Projects;
 }
 <div class="module standard">
-    <h2>Module
-    @Html.DisplayNameFor(x => Model.Title): @Html.DisplayFor(model => model.Title)</h2><br />
+    <h2>
+        Module
+        @Html.DisplayNameFor(x => Model.Title): @Html.DisplayFor(model => model.Title)
+    </h2><br />
 
-    @foreach (var project in newModuleProjectList)
-    {
-        @Html.Partial("~/Views/Projects/DetailsProject.cshtml", project);
-        <div id="ModuleProjectResult"></div>
-    }
+    <div class="container">
+        <ul class="nav nav-tabs">
+            @foreach (var project in newModuleProjectList)
+            {
+                    @if (project == newModuleProjectList[0])
+                    {
+                        <li>
+                            <a href="#@project.WebName()">@project.Name</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li>
+                            <a href="#@project.WebName()">@project.Name</a>
+                        </li>
+                    }
+                
+            }
+        </ul>
+
+        <div class="container tabcontents">
+            <div class="tab-content">
+                @foreach (var oneProject in newModuleProjectList)
+                {
+                    @if (oneProject == newModuleProjectList[0])
+                    {
+
+                        <div id="@oneProject.WebName()" class="tab-pane fade in active">
+                            @Html.Partial("~/Views/Projects/DetailsProject.cshtml", oneProject)
+                            <div id="ModuleProjectResult"></div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div id="@oneProject.WebName()" class="tab-pane">
+                            @Html.Partial("~/Views/Projects/DetailsProject.cshtml", oneProject)
+                            <div id="ModuleProjectResult"></div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
 </div>
 
 

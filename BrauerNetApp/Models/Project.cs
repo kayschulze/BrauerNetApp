@@ -28,6 +28,15 @@ namespace BrauerNetApp.Models
         {
             Name = name;
         }
+
+        public string WebName()
+        {
+            string formattedName = "";
+            string[] stringArray = Name.Split(" ");
+            formattedName = string.Join("", stringArray);
+
+            return formattedName;
+        }
     }
 }
 

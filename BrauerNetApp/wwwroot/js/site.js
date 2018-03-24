@@ -1,4 +1,42 @@
 ﻿$(document).ready(function () {
+    $(".nav-tabs a").click(function (event) {
+        event.preventDefault();
+        console.log("Hi");
+        $(this).tab('show');
+        /*$.ajax({
+            url: '@Url.Action("DetailsProject")',
+            type: 'GET',
+            data: $(this).serialize(),
+            dataType: 'json',
+            success: function (result) {
+                $('#ModuleProjectResult').html(hola);
+            }
+            
+        });*/
+        console.log("There");
+    });
+
+    /*
+    $(".nav_link").click(function () {
+        //Custom attribute data_id is used to store the ID
+        //Get the ID
+        var id = $(this).attr("data_id");
+        $.ajax({
+            url: '@Url.Action("DetailsProject", "Projects")',
+            type: "post",
+            dataType: "html",
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify({ id: id }), //add parameter
+            success: function (data) {
+                //success
+                $('#ProductsDiv' + id).html(data); //populate the tab content.
+            },
+            error: function () {
+                alert("error");
+            }
+        });
+    }); */
+
     $('#create-questor').submit(function (event) {
         event.preventDefault();
         $.ajax({
@@ -93,7 +131,7 @@
 
     $('.display-project').click(function () {
         $.ajax({
-            url: '@Url.Action("DisplayProject")',
+            url: '@Url.Action("ProjectDetails")',
             type: 'GET',
             data: $(this).serialize(),
             dataType: 'json',

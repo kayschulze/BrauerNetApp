@@ -3,7 +3,6 @@
 
 @{
     ViewData["Title"] = "QUESTOR";
-    //Layout = "~/Views/Shared/_Layout.cshtml";
 
     List<Goal> newQUESTORGoalList = new List<BrauerNetApp.Models.Goal>();
     newQUESTORGoalList = Model.Goals;
@@ -25,13 +24,16 @@
     <div class="goals standard">
         <h3>Goals</h3>
 
-        @foreach (var goal in newQUESTORGoalList)
-        {
-            @Html.Partial("~/Views/Goals/DisplayGoal.cshtml", goal);
-            <div id="QUESTORGoalResult"></div>
-        }
+        <ol>
+            @foreach (var goal in newQUESTORGoalList)
+            {
+                <li>
+                    @Html.Partial("~/Views/Goals/DisplayGoal.cshtml", goal)
+                    <div id="QUESTORGoalResult"></div>
+                </li>
+            }
+        </ol>
     </div>
-
 
     @foreach (var module in newQUESTORModuleList)
     {

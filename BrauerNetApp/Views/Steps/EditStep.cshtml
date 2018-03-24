@@ -2,7 +2,6 @@
 
 @{
     ViewData["Title"] = "Step";
-    //Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 @using (Html.BeginForm("EditStep", "Steps"))
@@ -10,9 +9,9 @@
     @Html.HiddenFor(model => model.ProjectId)
     @Html.HiddenFor(model => model.StepId)
 
-    @Html.LabelFor(model => model.Description)
     @Html.EditorFor(model => model.Description)
 
     <input type="submit" value="Save" class="btn btn-success" />
-    
+
+    @Html.ActionLink("Delete", "DeleteStep", "Steps", new { id = Model.StepId })
 }

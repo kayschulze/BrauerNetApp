@@ -2,7 +2,6 @@
 
 @{
     ViewData["Title"] = "QUESTOR";
-    //Layout = "~/Views/Shared/_Layout.cshtml";
 
     List<Goal> newQUESTORGoalList = new List<BrauerNetApp.Models.Goal>();
     newQUESTORGoalList = Model.Goals;
@@ -18,7 +17,8 @@
 }
 
 <div class="questormain standard">
-    <h2>QUESTOR: @Html.DisplayFor(model => Model.Question)</h2>
+    <h2>QUESTOR: @Html.DisplayFor(model => Model.Question)
+    @Html.ActionLink("Delete", "Delete", "QUESTORs", new { id = Model.QUESTORId })</h2>
 
     <hr />
     @using (Html.BeginForm())
@@ -31,26 +31,30 @@
         <input type="submit" value="Save" class="btn btn-success" />
     }
 
-        <div class="goals standard">
-            <h3>Goals</h3>
+    <div class="goals standard">
+        <h3>Goals</h3>
 
-            @foreach (var goal in newQUESTORGoalList)
-            {
-                @Html.Partial("~/Views/Goals/EditGoal.cshtml", goal, new ViewDataDictionary(this.ViewData) { { "id", goal.GoalId } });
-                <div id="editQUESTORGoalResult"></div>
-             }
-
-            @Html.Partial("~/Views/Goals/CreateGoal.cshtml", newQUESTORGoal)
-            <div id="newQUESTORGoalResult"></div>
-        </div>
-
-        
-        @foreach (var module in newQUESTORModuleList)
+        <ol>
+        @foreach (var goal in newQUESTORGoalList)
         {
-            @Html.Partial("~/Views/Modules/EditModule.cshtml", module, new ViewDataDictionary(this.ViewData) { { "id", module.ModuleId } });
-            <div id="editQUESTORModuleResult"></div>
+            <li>
+                @Html.Partial("~/Views/Goals/EditGoal.cshtml", goal, new ViewDataDictionary(this.ViewData) { { "id", goal.GoalId } })
+                <div id="editQUESTORGoalResult"></div>
+            </li>
         }
+        </ol>
 
-        @Html.Partial("~/Views/Modules/CreateModule.cshtml", newQUESTORModule)
-        <div id="newQUESTORModuleResult"></div>
+        @Html.Partial("~/Views/Goals/CreateGoal.cshtml", newQUESTORGoal)
+        <div id="newQUESTORGoalResult"></div>
+    </div>
+
+
+    @foreach (var module in newQUESTORModuleList)
+    {
+        @Html.Partial("~/Views/Modules/EditModule.cshtml", module, new ViewDataDictionary(this.ViewData) { { "id", module.ModuleId } });
+        <div id="editQUESTORModuleResult"></div>
+    }
+
+    @Html.Partial("~/Views/Modules/CreateModule.cshtml", newQUESTORModule)
+    <div id="newQUESTORModuleResult"></div>
 </div>

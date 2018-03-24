@@ -3,7 +3,6 @@
 
 @{
     ViewData["Title"] = "Project";
-    //Layout = "~/Views/Shared/_Layout.cshtml";
 
     List<Step> newProjectStepList = new List<BrauerNetApp.Models.Step>();
     newProjectStepList = Model.Steps;
@@ -20,30 +19,36 @@
 
 <div class="project standard">
     <h3>
+        Project
         <span class="left">@Html.DisplayNameFor(x => Model.Name): @Html.DisplayFor(model => model.Name)</span>
         <span class="right">@Html.DisplayNameFor(x => Model.NickName): @Html.DisplayFor(model => model.NickName)</span>
     </h3>
 
-    <h3>Project:  </h3>
-
     <div class="steps standard">
         <h3>Steps</h3>
 
-        @foreach (var step in newProjectStepList)
-        {
-            @Html.Partial("~/Views/Steps/DetailsStep.cshtml", step);
-            <div id="ProjectStepResult"></div>
-        }
-
+        <ol>
+            @foreach (var step in newProjectStepList)
+            {
+                <li>
+                    @Html.Partial("~/Views/Steps/DetailsStep.cshtml", step)
+                    <div id="ProjectStepResult"></div>
+                </li>
+            }
+        </ol>
     </div>
 
     <div class="responses standard">
         <h3>Responses</h3>
 
-        @foreach (var response in newProjectResponseList)
-        {
-            @Html.Partial("~/Views/Responses/DetailsResponse.cshtml", response);
-            <div id="ProjectResponseResult"></div>
-        }
+        <ol>
+            @foreach (var response in newProjectResponseList)
+            {
+            <li>
+                @Html.Partial("~/Views/Responses/DetailsResponse.cshtml", response)
+                <div id="ProjectResponseResult"></div>
+            </li>
+            }
+        </ol>
     </div>
 </div>

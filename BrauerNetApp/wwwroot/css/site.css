@@ -9,6 +9,22 @@
     margin: 5px;
 }
 
+.container {
+    position: relative;
+}
+
+.tabcontents {
+    width: 75%;
+    float: left;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+.background {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 20px;
+}
+
+
 .standard {
     border: solid;
     border-width: 2px;

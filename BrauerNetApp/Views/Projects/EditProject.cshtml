@@ -3,7 +3,6 @@
 
 @{
     ViewData["Title"] = "Project";
-    //Layout = "~/Views/Shared/_Layout.cshtml";
 
     List<Step> newProjectStepList = new List<BrauerNetApp.Models.Step>();
     newProjectStepList = Model.Steps;
@@ -24,25 +23,34 @@
         @Html.HiddenFor(model => model.ProjectId)
         @Html.HiddenFor(model => model.ModuleId)
 
-        <h3>Project:  </h3>
+    <h3>
+        Project
 
-        @Html.LabelFor(model => model.Name)
+        @Html.LabelFor(model => model.Name):
         @Html.EditorFor(model => model.Name)
+        <br />
 
         @Html.LabelFor(model => model.NickName)
         @Html.EditorFor(model => model.NickName)
 
         <input type="submit" value="Save" class="btn btn-success" />
+
+        @Html.ActionLink("Delete", "DeleteProject", "Projects", new { id = Model.ProjectId })
+    </h3>
     }
 
     <div class="steps standard">
         <h3>Steps</h3>
 
-        @foreach (var step in newProjectStepList)
-        {
-            @Html.Partial("~/Views/Steps/EditStep.cshtml", step, new ViewDataDictionary(this.ViewData) { { "stepid", step.StepId } });
-            <div id="editProjectStepResult"></div>
-        }
+        <ol>
+            @foreach (var step in newProjectStepList)
+            {
+                <li>
+                    @Html.Partial("~/Views/Steps/EditStep.cshtml", step, new ViewDataDictionary(this.ViewData) { { "stepid", step.StepId } })
+                    <div id="editProjectStepResult"></div>
+                </li>
+            }
+        </ol>
 
         @Html.Partial("~/Views/Steps/CreateStep.cshtml", newProjectStep)
         <div id="newProjectStepResult"></div> <br /><br />
@@ -51,11 +59,15 @@
     <div class="responses standard">
         <h3>Responses</h3>
 
-        @foreach (var response in newProjectResponseList)
-        {
-            @Html.Partial("~/Views/Responses/EditResponse.cshtml", response, new ViewDataDictionary(this.ViewData) { { "responseid", response.ResponseId } });
-            <div id="editProjectResponseResult"></div>
-        }
+        <ol>
+            @foreach (var response in newProjectResponseList)
+            {
+                <li>
+                    @Html.Partial("~/Views/Responses/EditResponse.cshtml", response, new ViewDataDictionary(this.ViewData) { { "responseid", response.ResponseId } })
+                    <div id="editProjectResponseResult"></div>
+                </li>
+            }
+        </ol>
 
         @Html.Partial("~/Views/Responses/CreateResponse.cshtml", newProjectResponse)
         <div id="newProjectResponseResult"></div> <br /><br />
