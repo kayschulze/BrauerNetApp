@@ -6,13 +6,19 @@
 }
 
 
-
 <h2>Are you sure you want to delete this QUESTOR?</h2>
 <hr />
 
 @Html.DisplayNameFor(model => model.Question): @Html.DisplayFor(model => model.Question)
 
-@using (Html.BeginForm())
+@if (User.Identity.IsAuthenticated)
 {
-    <input type="submit" value="Delete" />
+    @using (Html.BeginForm())
+    {
+        <input type="submit" value="Delete" />
+    }
+}
+else
+{
+    <h2>Please sign-in to gain access to this function.</h2>
 }

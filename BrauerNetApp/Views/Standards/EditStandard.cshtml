@@ -5,21 +5,31 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Edit Standard @Html.DisplayFor(model => model.Type), 
-    @Html.DisplayFor(model => model.Identifier) on BrauerNet</h2>
+<h2>
+    Edit Standard @Html.DisplayFor(model => model.Type),
+    @Html.DisplayFor(model => model.Identifier) on BrauerNet
+</h2>
 <hr />
-@using (Html.BeginForm("EditStandard", "Standards"))
+
+@if (User.Identity.IsAuthenticated)
 {
-    @Html.HiddenFor(model => model.StandardId)
+    @using (Html.BeginForm("EditStandard", "Standards"))
+    {
+        @Html.HiddenFor(model => model.StandardId)
 
-    @Html.LabelFor(model => model.Type)
-    @Html.EditorFor(model => model.Type)
+        @Html.LabelFor(model => model.Type)
+        @Html.EditorFor(model => model.Type)
 
-    @Html.LabelFor(model => model.Identifier)
-    @Html.EditorFor(model => model.Identifier)
+        @Html.LabelFor(model => model.Identifier)
+        @Html.EditorFor(model => model.Identifier)
 
-    @Html.LabelFor(model => model.Description)
-    @Html.EditorFor(model => model.Description)
+        @Html.LabelFor(model => model.Description)
+        @Html.EditorFor(model => model.Description)
 
-    <input type="submit" value="Save" class="btn btn-success" />
+        <input type="submit" value="Save" class="btn btn-success" />
+    }
+}
+else
+{
+    <h2>Please sign-in to gain access to this function.</h2>
 }

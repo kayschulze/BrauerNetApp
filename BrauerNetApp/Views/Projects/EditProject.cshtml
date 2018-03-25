@@ -17,59 +17,66 @@
     newProjectResponse.ProjectId = Model.ProjectId;
 }
 
-<div class="project standard">
-    @using (Html.BeginForm("EditProject", "Projects"))
-    {
-        @Html.HiddenFor(model => model.ProjectId)
-        @Html.HiddenFor(model => model.ModuleId)
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="project standard">
+        @using (Html.BeginForm("EditProject", "Projects"))
+        {
+            @Html.HiddenFor(model => model.ProjectId)
+            @Html.HiddenFor(model => model.ModuleId)
 
-    <h3>
-        Project
+            <h3>
+                Project
 
-        @Html.LabelFor(model => model.Name):
-        @Html.EditorFor(model => model.Name)
-        <br />
+                @Html.LabelFor(model => model.Name):
+                @Html.EditorFor(model => model.Name)
+                <br />
 
-        @Html.LabelFor(model => model.NickName)
-        @Html.EditorFor(model => model.NickName)
+                @Html.LabelFor(model => model.NickName)
+                @Html.EditorFor(model => model.NickName)
 
-        <input type="submit" value="Save" class="btn btn-success" />
+                <input type="submit" value="Save" class="btn btn-success" />
 
-        @Html.ActionLink("Delete", "DeleteProject", "Projects", new { id = Model.ProjectId })
-    </h3>
-    }
+                @Html.ActionLink("Delete", "DeleteProject", "Projects", new { id = Model.ProjectId })
+            </h3>
+        }
 
-    <div class="steps standard">
-        <h3>Steps</h3>
+        <div class="steps standard">
+            <h3>Steps</h3>
 
-        <ol>
-            @foreach (var step in newProjectStepList)
-            {
-                <li>
-                    @Html.Partial("~/Views/Steps/EditStep.cshtml", step, new ViewDataDictionary(this.ViewData) { { "stepid", step.StepId } })
-                    <div id="editProjectStepResult"></div>
-                </li>
-            }
-        </ol>
+            <ol>
+                @foreach (var step in newProjectStepList)
+                {
+                    <li>
+                        @Html.Partial("~/Views/Steps/EditStep.cshtml", step, new ViewDataDictionary(this.ViewData) { { "stepid", step.StepId } })
+                        <div id="editProjectStepResult"></div>
+                    </li>
+                }
+            </ol>
 
-        @Html.Partial("~/Views/Steps/CreateStep.cshtml", newProjectStep)
-        <div id="newProjectStepResult"></div> <br /><br />
+            @Html.Partial("~/Views/Steps/CreateStep.cshtml", newProjectStep)
+            <div id="newProjectStepResult"></div> <br /><br />
+        </div>
+
+        <div class="responses standard">
+            <h3>Responses</h3>
+
+            <ol>
+                @foreach (var response in newProjectResponseList)
+                {
+                    <li>
+                        @Html.Partial("~/Views/Responses/EditResponse.cshtml", response, new ViewDataDictionary(this.ViewData) { { "responseid", response.ResponseId } })
+                        <div id="editProjectResponseResult"></div>
+                    </li>
+                }
+            </ol>
+
+            @Html.Partial("~/Views/Responses/CreateResponse.cshtml", newProjectResponse)
+            <div id="newProjectResponseResult"></div> <br /><br />
+        </div>
     </div>
-
-    <div class="responses standard">
-        <h3>Responses</h3>
-
-        <ol>
-            @foreach (var response in newProjectResponseList)
-            {
-                <li>
-                    @Html.Partial("~/Views/Responses/EditResponse.cshtml", response, new ViewDataDictionary(this.ViewData) { { "responseid", response.ResponseId } })
-                    <div id="editProjectResponseResult"></div>
-                </li>
-            }
-        </ol>
-
-        @Html.Partial("~/Views/Responses/CreateResponse.cshtml", newProjectResponse)
-        <div id="newProjectResponseResult"></div> <br /><br />
-    </div>
-</div>
+}
+else
+{
+    <h2>Please sign-in to gain access to this function.</h2>
+}

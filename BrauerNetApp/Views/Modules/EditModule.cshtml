@@ -10,10 +10,12 @@
     newModuleProject.ModuleId = Model.ModuleId;
 }
 
-<div class="module standard">
-    @using (Html.BeginForm("EditModule", "Modules"))
-    {
-         <h2>
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="module standard">
+        @using (Html.BeginForm("EditModule", "Modules"))
+        {
+            <h2>
                 Module
                 @Html.LabelFor(x => Model.Title)
                 @Html.EditorFor(x => Model.Title)
@@ -24,52 +26,57 @@
                 <input type="submit" value="Submit" class="btn btn-success" />
 
                 @Html.ActionLink("Delete", "DeleteModule", "Modules", new { id = Model.ModuleId })
-    
-          </h2>
-      }
 
-    <div class="container">
-        <ul class="nav nav-tabs">
-            @foreach (var project in newModuleProjectList)
-            {
-                @if (project == newModuleProjectList[0])
-                {
-                    <li>
-                        <a href="#@project.WebName()">@project.Name</a>
-                    </li>
-                }
-                else
-                {
-                    <li>
-                        <a href="#@project.WebName()">@project.Name</a>
-                    </li>
-                }
-            }
-        </ul>
+            </h2>
+        }
 
-        <div class="container tabcontents">
-            <div class="tab-content">
-                @foreach (var oneProject in newModuleProjectList)
+        <div class="container">
+            <ul class="nav nav-tabs">
+                @foreach (var project in newModuleProjectList)
                 {
-                    @if (oneProject == newModuleProjectList[0])
+                    @if (project == newModuleProjectList[0])
                     {
-                        <div id="@oneProject.WebName()" class="tab-pane fade in active">
-                            @Html.Partial("~/Views/Projects/EditProject.cshtml", oneProject)
-                            <div id="editModuleProjectResult"></div>
-                        </div>
+                        <li>
+                            <a href="#@project.WebName()">@project.Name</a>
+                        </li>
                     }
                     else
                     {
-                        <div id="@oneProject.WebName()" class="tab-pane">
-                            @Html.Partial("~/Views/Projects/EditProject.cshtml", oneProject)
-                            <div id="editModuleProjectResult"></div>
-                        </div>
+                        <li>
+                            <a href="#@project.WebName()">@project.Name</a>
+                        </li>
                     }
                 }
+            </ul>
+
+            <div class="container tabcontents">
+                <div class="tab-content">
+                    @foreach (var oneProject in newModuleProjectList)
+                    {
+                        @if (oneProject == newModuleProjectList[0])
+                        {
+                            <div id="@oneProject.WebName()" class="tab-pane fade in active">
+                                @Html.Partial("~/Views/Projects/EditProject.cshtml", oneProject)
+                                <div id="editModuleProjectResult"></div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div id="@oneProject.WebName()" class="tab-pane">
+                                @Html.Partial("~/Views/Projects/EditProject.cshtml", oneProject)
+                                <div id="editModuleProjectResult"></div>
+                            </div>
+                        }
+                    }
+                </div>
             </div>
         </div>
-    </div>
 
-    @Html.Partial("~/Views/Projects/CreateProject.cshtml", newModuleProject)
-    <div id="newModuleProjectResult"></div>
-</div>
+        @Html.Partial("~/Views/Projects/CreateProject.cshtml", newModuleProject)
+        <div id="newModuleProjectResult"></div>
+    </div>
+}
+else
+{
+    <h2>Please sign-in to gain access to this function.</h2>
+}

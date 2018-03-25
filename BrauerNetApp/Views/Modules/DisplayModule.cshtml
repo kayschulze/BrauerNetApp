@@ -2,7 +2,6 @@
 
 @{
     ViewData["Title"] = "Module - Display";
-    //Layout = "~/Views/Shared/_Layout.cshtml";
 
     List<Project> newModuleProjectList = new List<BrauerNetApp.Models.Project>();
     newModuleProjectList = Model.Projects;
@@ -14,26 +13,25 @@
     </h2><br />
 
     <div class="container">
-        <ul class="nav nav-tabs">
-            @foreach (var project in newModuleProjectList)
-            {
-                    @if (project == newModuleProjectList[0])
-                    {
-                        <li>
-                            <a href="#@project.WebName()">@project.Name</a>
-                        </li>
-                    }
-                    else
-                    {
-                        <li>
-                            <a href="#@project.WebName()">@project.Name</a>
-                        </li>
-                    }
-                
-            }
-        </ul>
+        <div class="tabcontents">
+            <ul class="nav nav-tabs">
+                @foreach (var project in newModuleProjectList)
+                {
+                        @if (project == newModuleProjectList[0])
+                        {
+                            <li>
+                                <a href="#@project.WebName()">@project.Name</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li>
+                                <a href="#@project.WebName()">@project.Name</a>
+                            </li>
+                        }
+                }
+            </ul>
 
-        <div class="container tabcontents">
             <div class="tab-content">
                 @foreach (var oneProject in newModuleProjectList)
                 {

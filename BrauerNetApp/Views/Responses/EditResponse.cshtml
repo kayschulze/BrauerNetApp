@@ -5,14 +5,21 @@
     //Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@using (Html.BeginForm("EditResponse", "Responses"))
+@if (User.Identity.IsAuthenticated)
 {
-    @Html.HiddenFor(model => model.ProjectId)
-    @Html.HiddenFor(model => model.ResponseId)
+    @using (Html.BeginForm("EditResponse", "Responses"))
+    {
+        @Html.HiddenFor(model => model.ProjectId)
+        @Html.HiddenFor(model => model.ResponseId)
 
-    @Html.EditorFor(model => model.Description)
+        @Html.EditorFor(model => model.Description)
 
-    <input type="submit" value="Save" class="btn btn-success" />
+        <input type="submit" value="Save" class="btn btn-success" />
 
-    @Html.ActionLink("Delete", "DeleteResponse", "Responses", new { id = Model.ResponseId })
+        @Html.ActionLink("Delete", "DeleteResponse", "Responses", new { id = Model.ResponseId })
+    }
+}
+else
+{
+    <h2>Please sign-in to gain access to this function.</h2>
 }

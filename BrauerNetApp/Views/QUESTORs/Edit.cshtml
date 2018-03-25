@@ -16,45 +16,54 @@
     newQUESTORModule.QUESTORId = Model.QUESTORId;
 }
 
-<div class="questormain standard">
-    <h2>QUESTOR: @Html.DisplayFor(model => Model.Question)
-    @Html.ActionLink("Delete", "Delete", "QUESTORs", new { id = Model.QUESTORId })</h2>
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="questormain standard">
+        <h2>
+            QUESTOR: @Html.DisplayFor(model => Model.Question)
+            @Html.ActionLink("Delete", "Delete", "QUESTORs", new { id = Model.QUESTORId })
+        </h2>
 
-    <hr />
-    @using (Html.BeginForm())
-    {
-        @Html.HiddenFor(model => Model.QUESTORId)
-
-        @Html.LabelFor(model => Model.Question)
-        @Html.EditorFor(model => Model.Question)
-
-        <input type="submit" value="Save" class="btn btn-success" />
-    }
-
-    <div class="goals standard">
-        <h3>Goals</h3>
-
-        <ol>
-        @foreach (var goal in newQUESTORGoalList)
+        <hr />
+        @using (Html.BeginForm())
         {
-            <li>
-                @Html.Partial("~/Views/Goals/EditGoal.cshtml", goal, new ViewDataDictionary(this.ViewData) { { "id", goal.GoalId } })
-                <div id="editQUESTORGoalResult"></div>
-            </li>
+            @Html.HiddenFor(model => Model.QUESTORId)
+
+            @Html.LabelFor(model => Model.Question)
+            @Html.EditorFor(model => Model.Question)
+
+            <input type="submit" value="Save" class="btn btn-success" />
         }
-        </ol>
 
-        @Html.Partial("~/Views/Goals/CreateGoal.cshtml", newQUESTORGoal)
-        <div id="newQUESTORGoalResult"></div>
+        <div class="goals standard">
+            <h3>Goals</h3>
+
+            <ol>
+                @foreach (var goal in newQUESTORGoalList)
+                {
+                    <li>
+                        @Html.Partial("~/Views/Goals/EditGoal.cshtml", goal, new ViewDataDictionary(this.ViewData) { { "id", goal.GoalId } })
+                        <div id="editQUESTORGoalResult"></div>
+                    </li>
+                }
+            </ol>
+
+            @Html.Partial("~/Views/Goals/CreateGoal.cshtml", newQUESTORGoal)
+            <div id="newQUESTORGoalResult"></div>
+        </div>
+
+
+        @foreach (var module in newQUESTORModuleList)
+        {
+            @Html.Partial("~/Views/Modules/EditModule.cshtml", module, new ViewDataDictionary(this.ViewData) { { "id", module.ModuleId } });
+            <div id="editQUESTORModuleResult"></div>
+        }
+
+        @Html.Partial("~/Views/Modules/CreateModule.cshtml", newQUESTORModule)
+        <div id="newQUESTORModuleResult"></div>
     </div>
-
-
-    @foreach (var module in newQUESTORModuleList)
-    {
-        @Html.Partial("~/Views/Modules/EditModule.cshtml", module, new ViewDataDictionary(this.ViewData) { { "id", module.ModuleId } });
-        <div id="editQUESTORModuleResult"></div>
-    }
-
-    @Html.Partial("~/Views/Modules/CreateModule.cshtml", newQUESTORModule)
-    <div id="newQUESTORModuleResult"></div>
-</div>
+}
+else
+{
+    <h2>Please sign-in to gain access to this function.</h2>
+}

@@ -35,9 +35,40 @@
         </ol>
     </div>
 
-    @foreach (var module in newQUESTORModuleList)
-    {
-        @Html.Partial("~/Views/Modules/DisplayModule.cshtml", module);
-        <div id="QUESTORModuleResult"></div>
-    }
+    <div class="container modulelist">
+        <div class="tab standard">
+            <h3>Module List</h3>
+            @foreach (var module in newQUESTORModuleList)
+            {
+                @if (module == newQUESTORModuleList[0])
+                {
+                    <button class="tablinks" onclick="openModule(event, '@module.WebTitle()')" id="defaultOpen">@module.WebTitle()</button>
+                    <br />
+                }
+                else
+                {
+                    <button class="tablinks" onclick="openModule(event, '@module.WebTitle()')">@module.WebTitle()</button>
+                    <br />
+                }
+            }
+        </div>
+
+        @foreach (var module in newQUESTORModuleList)
+        {
+            @if (module == newQUESTORModuleList[0])
+            {
+                <div id="@module.WebTitle()" class="tabcontent">
+                    @Html.Partial("~/Views/Modules/DisplayModule.cshtml", module)
+                    <div id="QUESTORModuleResult"></div>
+                </div>
+            }
+            else
+            {
+                <div id="@module.WebTitle()" class="tabcontent">
+                    @Html.Partial("~/Views/Modules/DisplayModule.cshtml", module)
+                    <div id="QUESTORModuleResult"></div>
+                </div>
+            }
+        }
+    </div>
 </div>

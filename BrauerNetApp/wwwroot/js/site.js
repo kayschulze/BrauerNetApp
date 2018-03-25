@@ -3,39 +3,32 @@
         event.preventDefault();
         console.log("Hi");
         $(this).tab('show');
-        /*$.ajax({
-            url: '@Url.Action("DetailsProject")',
-            type: 'GET',
-            data: $(this).serialize(),
-            dataType: 'json',
-            success: function (result) {
-                $('#ModuleProjectResult').html(hola);
-            }
-            
-        });*/
         console.log("There");
     });
 
-    /*
-    $(".nav_link").click(function () {
-        //Custom attribute data_id is used to store the ID
-        //Get the ID
-        var id = $(this).attr("data_id");
-        $.ajax({
-            url: '@Url.Action("DetailsProject", "Projects")',
-            type: "post",
-            dataType: "html",
-            contentType: 'application/json; charset=utf-8',
-            data: JSON.stringify({ id: id }), //add parameter
-            success: function (data) {
-                //success
-                $('#ProductsDiv' + id).html(data); //populate the tab content.
-            },
-            error: function () {
-                alert("error");
-            }
-        });
+    /*$("div.module-tab-menu>div.list-group>a").click(function (e) {
+        e.preventDefault();
+        $(this).siblings('a.active').removeClass("active");
+        $(this).addClass("active");
+        var index = $(this).index();
+        $("div.module-tab>div.module-tab-content").removeClass("active");
+        $("div.module-tab>div.module-tab-content").eq(index).addClass("active");
     }); */
+
+    /*$(".tab").click(function (event, moduleName) {
+        console.log("Groovy");
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(moduleName).style.display = "block";
+        event.currentTarget.className += " active";
+    }; */
 
     $('#create-questor').submit(function (event) {
         event.preventDefault();

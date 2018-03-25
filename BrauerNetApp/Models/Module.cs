@@ -20,6 +20,15 @@ namespace BrauerNetApp.Models
         {
             Title = title;
         }
+
+        public string WebTitle()
+        {
+            string formattedTitle = "";
+            string[] stringArray = Title.Split(" ");
+            formattedTitle = string.Join("", stringArray);
+
+            return formattedTitle;
+        }
     }
 }
 

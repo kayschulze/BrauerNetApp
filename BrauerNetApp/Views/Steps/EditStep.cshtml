@@ -4,14 +4,21 @@
     ViewData["Title"] = "Step";
 }
 
-@using (Html.BeginForm("EditStep", "Steps"))
+@if (User.Identity.IsAuthenticated)
 {
-    @Html.HiddenFor(model => model.ProjectId)
-    @Html.HiddenFor(model => model.StepId)
+    @using (Html.BeginForm("EditStep", "Steps"))
+    {
+        @Html.HiddenFor(model => model.ProjectId)
+        @Html.HiddenFor(model => model.StepId)
 
-    @Html.EditorFor(model => model.Description)
+        @Html.EditorFor(model => model.Description)
 
-    <input type="submit" value="Save" class="btn btn-success" />
+        <input type="submit" value="Save" class="btn btn-success" />
 
-    @Html.ActionLink("Delete", "DeleteStep", "Steps", new { id = Model.StepId })
+        @Html.ActionLink("Delete", "DeleteStep", "Steps", new { id = Model.StepId })
+    }
+}
+else
+{
+    <h2>Please sign-in to gain access to this function.</h2>
 }

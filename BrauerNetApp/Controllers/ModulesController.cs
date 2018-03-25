@@ -44,7 +44,7 @@ namespace BrauerNetApp.Controllers
                 .Include(p => p.Projects)
                 .ThenInclude(r => r.Responses)
                 .Include(p => p.Projects)
-                .ThenInclude(s => s.Standards)
+                //.ThenInclude(s => s.Standards)
                 .FirstOrDefault(x => x.QUESTORId == id);
             return View(thisModule);
         }
