@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
@@ -11,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using BrauerNetApp.Data;
 using BrauerNetApp.Models;
 using BrauerNetApp.Services;
+using Microsoft.AspNetCore.Http;
 
 namespace BrauerNetApp
 {
@@ -28,7 +25,10 @@ namespace BrauerNetApp
         {
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
-
+                
+            /*services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                */
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
@@ -62,6 +62,11 @@ namespace BrauerNetApp
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=QUESTORs}/{action=Index}/{id?}");
+            });
+
+            app.Run(async (context) =>
+            {
+                await context.Response.WriteAsync("Hello World!");
             });
         }
     }

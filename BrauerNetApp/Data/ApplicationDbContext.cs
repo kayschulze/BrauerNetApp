@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using BrauerNetApp.Models;
 
@@ -28,7 +24,7 @@ namespace BrauerNetApp.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
-            options.UseMySql(@"Server=localhost;Port=3306;database=brauernetdb;uid=root;pwd=root;");
+            options.UseMySql(@"Server=localhost;Port=3306;database=brauernetdb;uid=root;pwd=root");
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
