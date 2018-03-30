@@ -43,7 +43,7 @@ namespace BrauerNetApp.Controllers
             var thisProject = db.Projects
                 .Include(s => s.Steps)
                 .Include(r => r.Responses)
-                .Include(s => s.Standards)
+                //.Include(s => s.Standards)
                 .FirstOrDefault(x => x.ProjectId == id);
             return View(thisProject);
         }
