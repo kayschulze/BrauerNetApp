@@ -1,5 +1,4 @@
 ﻿@model List<BrauerNetApp.Models.Stakeholder>
-@using BrauerNetApp.Models;
 
 @{
     ViewData["Title"] = "Stakeholder";
@@ -13,8 +12,8 @@
     {
         @foreach (var stakeholder in Model)
         {
-            <div class="col-md-4">
-                <div class="panel panel-info">
+            <div class="col-md-4 standard">
+                <div class="panel standard stakeholders">
                     <div class="panel-heading">
                         <h3>@Html.DisplayFor(modelItem => stakeholder.Organization)</h3>
                         <h3>@Html.DisplayFor(modelItem => stakeholder.ContactName)</h3>
@@ -26,26 +25,10 @@
                             <li>@Html.ActionLink("Delete Stakeholder", "Delete", new { id = stakeholder.StakeholderId })</li>
                             <li>@Html.ActionLink("Standard Details", "Details", new { id = stakeholder.StakeholderId })</li>
                         </ul>
-
                     </div>
                 </div>
             </div>
         }
     }
-
-    <h2>
-        @Html.ActionLink("Create Project", "Create", "Projects")
-    </h2>
-    <h2>
-        @Html.ActionLink("Create Goal", "Create", "Goals")
-    </h2>
-    <h2>
-        @Html.ActionLink("Create Participant", "Create", "Participants")
-    </h2>
-    <h2>
-        @Html.ActionLink("Create Stakeholder", "Create", "Stakeholders")
-    </h2>
-    <h2>
-        @Html.ActionLink("Create Standard", "Create", "Standards")
-    </h2>
+</div>
 

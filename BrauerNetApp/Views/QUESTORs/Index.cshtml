@@ -13,10 +13,9 @@
         @foreach (var questor in Model)
         {
             <div class="col-md-4">
-                <div class="panel panel-info">
-                    <div class="panel-heading">
+                <div class="panel standard">
+                    <div class="panel-heading questormain standard">
                         <h3>@Html.DisplayFor(modelItem => questor.Question)</h3>
-
                     </div>
                     <div class="panel-body">
                         <ul>
@@ -31,20 +30,4 @@
         }
     }
 </div>
-
-<h2>
-    @Html.ActionLink("Create QUESTOR", "Create", "QUESTORs")
-</h2>
-<h2>
-    @Html.ActionLink("Create Project", "Create", "Projects")
-</h2>
-<h2>
-    @Html.ActionLink("Create Participant", "Register", "Account")
-</h2>
-<h2>
-    @Html.ActionLink("Create Stakeholder", "Create", "Stakeholders")
-</h2>
-<h2>
-    @Html.ActionLink("Create Standard", "Create", "Standards")
-</h2>
 

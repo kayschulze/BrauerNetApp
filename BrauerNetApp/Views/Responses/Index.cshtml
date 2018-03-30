@@ -1,5 +1,4 @@
 ﻿@model List<BrauerNetApp.Models.Step>
-@using BrauerNetApp.Models;
 
 @{
     ViewData["Title"] = "Project";
@@ -14,10 +13,9 @@
         @foreach (var step in Model)
         {
             <div class="col-md-4">
-                <div class="panel panel-info">
-                    <div class="panel-heading">
+                <div class="panel standard">
+                    <div class="panel-heading steps standard">
                         <h3>@Html.DisplayFor(modelItem => step.Description)</h3>
-
                     </div>
                     <div class="panel-body">
                         <ul>

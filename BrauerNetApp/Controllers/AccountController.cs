@@ -38,14 +38,14 @@ namespace BrauerNetApp.Controllers
             _logger = logger;
         }
 
-        //public ApplicationUser db = new ApplicationUser();
+        /*public ApplicationUser db = new ApplicationUser();
 
-        /*public IActionResult Index()
+        public IActionResult Index()
         {
             var participantsList = db.ApplicationUser.ToList();
 
-            return View(participantsList);
-        }*/
+             return View(participantsList);
+        } */
 
         [TempData]
         public string ErrorMessage { get; set; }

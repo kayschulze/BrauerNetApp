@@ -31,12 +31,11 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a asp-area="" asp-controller="QUESTORs" asp-action="Index" class="navbar-brand">BrauerNetApp</a>
+                <a asp-area="" asp-controller="QUESTORs" asp-action="Index" class="navbar-brand">BrauerNet</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a asp-area="" asp-controller="Projects" asp-action="Index">Projects</a></li>
-                    <li><a asp-area="" asp-controller="Account" asp-action="Index">Participants</a></li>
                     <li><a asp-area="" asp-controller="Stakeholders" asp-action="Index">Stakeholders</a></li>
                     <li><a asp-area="" asp-controller="Standards" asp-action="Index">Standards</a></li>
                 </ul>
@@ -48,7 +47,22 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; 2018 - BrauerNetApp</p>
+            <h2>
+                @Html.ActionLink("Create QUESTOR", "Create", "QUESTORs")
+            </h2>
+            <h2>
+                @Html.ActionLink("Create Project", "CreateProject", "Projects")
+            </h2>
+            <h2>
+                @Html.ActionLink("Create Participant", "Register", "Account")
+            </h2>
+            <h2>
+                @Html.ActionLink("Create Stakeholder", "CreateStakeholder", "Stakeholders")
+            </h2>
+            <h2>
+                @Html.ActionLink("Create Standard", "CreateStandard", "Standards")
+            </h2>
+            <p>&copy; 2018 - BrauerNet</p>
         </footer>
     </div>
     <environment names="Development">

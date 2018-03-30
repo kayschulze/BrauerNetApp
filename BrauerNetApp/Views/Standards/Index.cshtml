@@ -1,5 +1,4 @@
 ﻿@model List<BrauerNetApp.Models.Standard>
-@using BrauerNetApp.Models;
 
 @{
     ViewData["Title"] = "Standard";
@@ -13,11 +12,11 @@
     {
         @foreach (var standard in Model)
         {
-            <div class="col-md-4">
-                <div class="panel panel-info">
+            <div class="col-md-4 standard">
+                <div class="panel standard">
                     <div class="panel-heading">
-                        <h3>@Html.DisplayFor(modelItem => standard.Type)</h3>
-                        <h3>@Html.DisplayFor(modelItem => standard.Identifier)</h3>
+                        <h3>@Html.DisplayFor(modelItem => standard.Type)
+                        @Html.DisplayFor(modelItem => standard.Identifier)</h3>
                         <h3>@Html.DisplayFor(modelItem => standard.Description)</h3>
                     </div>
                     <div class="panel-body">
@@ -33,20 +32,3 @@
         }
     }
 </div>
-
-    <h2>
-        @Html.ActionLink("Create Project", "Create", "Projects")
-    </h2>
-    <h2>
-        @Html.ActionLink("Create Goal", "Create", "Goals")
-    </h2>
-    <h2>
-        @Html.ActionLink("Create Participant", "Create", "Participants")
-    </h2>
-    <h2>
-        @Html.ActionLink("Create Stakeholder", "Create", "Stakeholders")
-    </h2>
-    <h2>
-        @Html.ActionLink("Create Standard", "Create", "Standards")
-    </h2>
-

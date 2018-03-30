@@ -33,7 +33,7 @@ namespace BrauerNetApp.Controllers
             return View(standardsList);
         }
 
-        public IActionResult Details(int id)
+        public IActionResult DetailsStandard(int id)
         {
             ViewBag.thisStandard = standardRepo.Standards;
             var thisStandard = standardRepo.Standards.FirstOrDefault(x => x.StandardId == id);
@@ -41,32 +41,32 @@ namespace BrauerNetApp.Controllers
             return View(thisStandard);
         }
 
-        public IActionResult Create()
+        public IActionResult CreateStandard()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult Create(Standard standard)
+        public IActionResult CreateStandard(Standard standard)
         {
             standardRepo.Save(standard);
             return RedirectToAction("Index");
         }
 
-        public IActionResult Edit(int id)
+        public IActionResult EditStandard(int id)
         {
             var thisStandard = standardRepo.Standards.FirstOrDefault(x => x.StandardId == id);
             return View(thisStandard);
         }
 
         [HttpPost]
-        public IActionResult Edit(Standard standard)
+        public IActionResult EditStandard(Standard standard)
         {
             standardRepo.Edit(standard);
             return RedirectToAction("Index");
         }
 
-        public IActionResult Delete(int id)
+        public IActionResult DeleteStandard(int id)
         {
             var thisStandard = standardRepo.Standards.FirstOrDefault(x => x.StandardId == id);
             return View(thisStandard);
