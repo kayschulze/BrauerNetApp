@@ -4,8 +4,7 @@
     ViewData["Title"] = "Goal - Display";
 }
 
-@if (User.Identity.IsAuthenticated)
-{
+
     @using (Html.BeginForm("EditGoal", "Goals"))
     {
         @Html.HiddenFor(x => Model.GoalId)
@@ -18,8 +17,3 @@
 
         @Html.ActionLink("Delete", "DeleteGoal", "Goals", new { id = Model.GoalId })
     }
-}
-else
-{
-    <h2>Please sign-in to gain access to this function.</h2>
-}

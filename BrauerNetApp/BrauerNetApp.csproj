@@ -6,14 +6,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Connected Services\brauernetdbAzureStorage\**" />
+    <Content Remove="Connected Services\brauernetdbAzureStorage\**" />
+    <EmbeddedResource Remove="Connected Services\brauernetdbAzureStorage\**" />
+    <None Remove="Connected Services\brauernetdbAzureStorage\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="Data\Migrations\20180208080820_Attempt.cs" />
     <Compile Remove="Data\Migrations\20180208080820_Attempt.Designer.cs" />
   </ItemGroup>
 
 
   <ItemGroup>
-    <PackageReference Include="AWS.Logger.Core" Version="1.1.8" />
-    <PackageReference Include="AWSSDK.Core" Version="3.3.21.16" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.1" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.2" PrivateAssets="All" />
@@ -29,6 +34,10 @@
 
   <ItemGroup>
     <WCFMetadata Include="Connected Services" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Connected Services\" />
   </ItemGroup>
 
 </Project>

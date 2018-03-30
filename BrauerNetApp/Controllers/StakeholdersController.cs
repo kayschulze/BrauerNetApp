@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using BrauerNetApp.Models;
 
@@ -33,7 +30,7 @@ namespace BrauerNetApp.Controllers
             return View(stakeholdersList);
         }
 
-        public IActionResult Details(int id)
+        public IActionResult DetailsStakeholder(int id)
         {
             ViewBag.thisStakeholder = stakeholderRepo.Stakeholders;
             var thisStakeholder = stakeholderRepo.Stakeholders.FirstOrDefault(x => x.StakeholderId == id);
@@ -41,13 +38,13 @@ namespace BrauerNetApp.Controllers
             return View(thisStakeholder);
         }
 
-        public IActionResult Create()
+        public IActionResult CreateStakeholder()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult Create(Stakeholder stakeholder)
+        public IActionResult CreateStakeholder(Stakeholder stakeholder)
         {
             stakeholderRepo.Save(stakeholder);
             return RedirectToAction("Index");
@@ -60,13 +57,13 @@ namespace BrauerNetApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(Stakeholder stakeholder)
+        public IActionResult EditStakeholder(Stakeholder stakeholder)
         {
             stakeholderRepo.Edit(stakeholder);
             return RedirectToAction("Index");
         }
 
-        public IActionResult Delete(int id)
+        public IActionResult DeleteStakeholder(int id)
         {
             var thisStakeholder = stakeholderRepo.Stakeholders.FirstOrDefault(x => x.StakeholderId == id);
             return View(thisStakeholder);

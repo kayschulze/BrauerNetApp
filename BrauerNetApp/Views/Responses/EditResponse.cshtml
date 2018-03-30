@@ -5,8 +5,7 @@
     //Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@if (User.Identity.IsAuthenticated)
-{
+
     @using (Html.BeginForm("EditResponse", "Responses"))
     {
         @Html.HiddenFor(model => model.ProjectId)
@@ -18,8 +17,3 @@
 
         @Html.ActionLink("Delete", "DeleteResponse", "Responses", new { id = Model.ResponseId })
     }
-}
-else
-{
-    <h2>Please sign-in to gain access to this function.</h2>
-}

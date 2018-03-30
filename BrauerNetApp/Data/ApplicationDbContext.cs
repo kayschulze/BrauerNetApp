@@ -24,7 +24,7 @@ namespace BrauerNetApp.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
-            options.UseMySql(@"Server=localhost;Port=3306;database=brauernetdb;uid=root;pwd=root");
+            options.UseMySql(@"Server=localhost;Port=3306;database=brauernetdb;uid=root;pwd=root;");
         }
 
         protected override void OnModelCreating(ModelBuilder builder)

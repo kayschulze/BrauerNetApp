@@ -17,8 +17,7 @@
     newProjectResponse.ProjectId = Model.ProjectId;
 }
 
-@if (User.Identity.IsAuthenticated)
-{
+
     <div class="project standard">
         @using (Html.BeginForm("EditProject", "Projects"))
         {
@@ -75,8 +74,3 @@
             <div id="newProjectResponseResult"></div> <br /><br />
         </div>
     </div>
-}
-else
-{
-    <h2>Please sign-in to gain access to this function.</h2>
-}

@@ -10,8 +10,6 @@
     newModuleProject.ModuleId = Model.ModuleId;
 }
 
-@if (User.Identity.IsAuthenticated)
-{
     <div class="module standard">
         @using (Html.BeginForm("EditModule", "Modules"))
         {
@@ -31,25 +29,25 @@
         }
 
         <div class="container">
-            <ul class="nav nav-tabs">
-                @foreach (var project in newModuleProjectList)
-                {
-                    @if (project == newModuleProjectList[0])
+            <div class="tabcontents">
+                <ul class="nav nav-tabs">
+                    @foreach (var project in newModuleProjectList)
                     {
-                        <li>
-                            <a href="#@project.WebName()">@project.Name</a>
-                        </li>
+                        @if (project == newModuleProjectList[0])
+                        {
+                            <li>
+                                <a href="#@project.WebName()">@project.Name</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li>
+                                <a href="#@project.WebName()">@project.Name</a>
+                            </li>
+                        }
                     }
-                    else
-                    {
-                        <li>
-                            <a href="#@project.WebName()">@project.Name</a>
-                        </li>
-                    }
-                }
-            </ul>
+                </ul>
 
-            <div class="container tabcontents">
                 <div class="tab-content">
                     @foreach (var oneProject in newModuleProjectList)
                     {
@@ -75,8 +73,3 @@
         @Html.Partial("~/Views/Projects/CreateProject.cshtml", newModuleProject)
         <div id="newModuleProjectResult"></div>
     </div>
-}
-else
-{
-    <h2>Please sign-in to gain access to this function.</h2>
-}

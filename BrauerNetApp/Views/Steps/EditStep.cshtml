@@ -4,8 +4,6 @@
     ViewData["Title"] = "Step";
 }
 
-@if (User.Identity.IsAuthenticated)
-{
     @using (Html.BeginForm("EditStep", "Steps"))
     {
         @Html.HiddenFor(model => model.ProjectId)
@@ -17,8 +15,3 @@
 
         @Html.ActionLink("Delete", "DeleteStep", "Steps", new { id = Model.StepId })
     }
-}
-else
-{
-    <h2>Please sign-in to gain access to this function.</h2>
-}

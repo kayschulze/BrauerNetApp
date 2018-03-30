@@ -10,14 +10,9 @@
 
 @Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)
 
-@if (User.Identity.IsAuthenticated)
-{
+
     @using (Html.BeginForm())
     {
         <input type="submit" value="Delete" />
     }
-}
-else
-{
-    <h2>Please sign-in to gain access to this function.</h2>
-}
+

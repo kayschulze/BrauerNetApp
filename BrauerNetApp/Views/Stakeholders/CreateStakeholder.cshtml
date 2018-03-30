@@ -11,7 +11,7 @@
 @using (Html.BeginForm())
 {
     @Html.LabelFor(model => model.Organization)
-    @Html.EditorFor(model => model.Organization)
+    @Html.TextBoxFor(model => model.Organization, new { @style = "myCss" })
 
     @Html.LabelFor(model => model.ContactName)
     @Html.EditorFor(model => model.ContactName)
